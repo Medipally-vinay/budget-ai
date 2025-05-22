@@ -1,0 +1,397 @@
+.component{
+    display: flex;
+    flex-direction: row;
+    /* margin:2%; */
+    background-color: white;
+    justify-content: space-around;
+    padding: 2%;
+}
+  h3 {
+        display: flex; /* Enable flexbox */
+        justify-content: center; /* Horizontally center the content */
+        align-items: center; /* Vertically center the content */
+        text-align: center; /* For multiline content, ensure horizontal alignment */
+        background-color: #00867d;
+        color: white;
+        height: 40px;
+        width: auto;
+        margin: 0 auto; /* Center the h3 element itself if needed */
+        border-radius: 0px; /* Optional: Add rounded corners */
+        padding: 3px 3px 3px 3px;
+    }
+.styled-budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.styled-budget-table th {
+  background-color: #00867d;
+  color: white;
+  min-width: 85px;
+}
+
+.styled-budget-table td {
+  padding: 5px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.table-choice {
+  margin-bottom: 30px;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 20px;
+  user-select: none;
+  cursor: pointer;
+}
+  table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+      }
+ 
+      table th,
+      table td {
+        text-align: left;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        width:50px;
+      }
+ 
+      table th {
+        font-family: Arial, sans-serif;
+        background-color: #00867d;
+        color: white;
+      }
+ 
+      table tr:nth-child(even) {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+ 
+
+
+
+.table-wrapper{
+        margin-left: 0px;
+}
+
+
+.triple-container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  padding: 50px 0;
+}
+
+
+.eye-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+#form-display {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+
+
+.form-item {
+    display: flex;
+    justify-content: space-between; /* Align label and value to opposite sides */
+    border-bottom: 1px solid black;
+    background: #00867d;
+    color: white;
+    padding-left: 5px;
+}
+ 
+.form-item label {
+    font-weight: bold;
+    width: 50%;
+    border-right: 1px solid black;
+    margin-top: 3px;
+}
+ 
+.form-item span {
+    width: 50%;
+    background: white;
+    color: black;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.span-div{
+  background: white;
+  color: black;
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+}
+ .input-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 22px; /* Space between each label-input pair */
+  margin: 20px 0;
+}
+
+
+.input-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 22px; /* Space between each label-input pair */
+  margin: 20px 0;
+}
+ 
+.input-box {
+  display: flex;
+  justify-content: space-between; /* Distribute space between label, colon, and input */
+  align-items: center; /* Vertically align items */
+}
+ 
+.input-box label {
+  font-weight: bold;
+  display: flex;
+  gap: 5px; /* Add gap between label text and colon */
+  align-items: center; /* Ensure the text and colon align properly */
+}
+ 
+.colon {
+  display: inline-block;
+  text-align: center; /* Center the colon */
+}
+ 
+.input-box input {
+  padding: 5px;
+  width: 150px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  color: #555;
+}
+ .button-container{
+  display: flex;
+  gap: 25px;
+  justify-content: flex-end;
+}
+
+
+ 
+      #generateBudgetButton{
+        margin-top: 10px;
+        font-family: Arial, sans-serif;
+        background-color: #d6dfe6;
+        color: #00867d;
+        border: 3px solid #00867d;
+        width: 160px;
+      }
+      #generateSubmitButton,#downloadExcelButton{
+        margin-top: 15px;
+        font-family: Arial, sans-serif;
+        background-color: #d6dfe6;
+        color: #00867d;
+        border: 3px solid #00867d;
+        width: 150px;
+      }
+
+  
+/* Overlay: covers the entire page */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5); /* semi-transparent black */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; /* high z-index to appear above all content */
+}
+
+/* Modal box: centered in the overlay */
+.modal {
+  background: #fff;
+  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  min-width: 340px;
+  max-width: 90vw;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+/* Modal content styling (from your previous CSS) */
+.modal h2 {
+  margin-top: 0;
+  /* color: #4caf50; */
+  color:black;
+  font-size: 16px;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+  font-size: 24px;
+  justify-content: center;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.star {
+  color: #ccc;
+}
+
+.star.selected {
+  color: gold;
+}
+
+input[type="number"], textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.modal-buttons {
+  text-align: right;
+  margin-top: 15px;
+  display: flex;
+  gap: 76%;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ok-btn {
+  background-color: #4caf50;
+  color: white;
+  width: 26%;
+    height: 4%;
+
+}
+
+#close-btn {
+  
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  width: 26%;
+  height: 4%;
+}
+
+.thank-you-message h2 {
+  color: #4caf50;
+  margin-bottom: 0;
+}
+.thank-you-message h2 {
+  color: #43a047; /* Material green shade */
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  margin-top: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Close button styling */
+.ok-btn  {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 auto;
+ 
+  transition: background 0.2s;
+}
+.close-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 auto;
+ 
+  transition: background 0.2s;
+}
+
+.ok-btn:hover, #close-btn:hover {
+  background-color: #388e3c;
+}
+   button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+         font-family: Arial, sans-serif;
+      
+      }
+ 
+      input[type="file"] {
+        border: none;
+      }
+ 
+      button {
+        background-color: #00867d;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        background-color: #d6dfe6;
+        color: #00867d;
+        border: 3px solid #00867d;
+        width: 160px;
+            border: 3px solid #00867d;
+      }
+      button:hover{
+         background-color: #d6dfe6;
+        color: #333;
+      }
+      #generateSubmitButton:hover {
+        background-color: #d6dfe6;
+        color: #333;
+      }
+      #downloadExcelButton:hover {
+        background-color: #d6dfe6;
+        color: #333;
+      }
+      #generateBudgetButton:hover {
+        background-color: #d6dfe6;
+        color: #333;
+      }
+
+.btn-container{
+  display: flex;
+  justify-content:space-around;
+}
+ 

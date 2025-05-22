@@ -1,0 +1,209 @@
+<div class="component">
+    <div>
+      <img [routerLink]="['/']" src="assets/back.png" style="height: 40px; width: 40px; cursor: pointer;"> 
+    </div>
+    
+
+     <div class="table-choices-list" style="min-width: 428px;">
+        <div><h3>Budget Extract From Contract</h3></div>
+     <div *ngFor="let item of tablesData; index as idx" class="table-choice">
+     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
+     <span (click)="onTableToggle(idx)" style="cursor: pointer;">
+      {{ selectedIndex === idx ? '▼' : '▶' }}
+     </span>
+     <span (click)="onTableToggle(idx)" class="label">
+      {{ item.description }} - {{ item.overall_confidence }} Confidence Level
+     </span>
+
+     <table *ngIf="selectedIndex === idx" class="styled-budget-table">
+      <thead>
+        <tr>
+          <th>Visit</th>
+          <th>Rate</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let visit
+        of item.table">
+          
+          <tr>
+
+          <td>{{ visit['VISIT NAME'] }}</td>
+      <td>{{ visit['VISIT COST'] }}</td>
+      <td>{{ visit.CONFIDENCE }}</td>
+
+
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+        
+    
+    <div class="table-wrapper" style="min-width: 325px;">
+              <div class="triple-container">
+                <div class="eye-container">
+                  <img src="assets/eye.png" height="20px" width="40px"/>
+                  View Uploaded Contract
+                </div>
+                <span id="successPercentage" style="margin-left: 10px; font-weight: bold; color: green;"></span>
+                <div id="form-display">
+                  <div class="form-item">
+                      <label for="studyField">Study</label>
+                      <div class="span-div">
+                        <span id="studyValue">9999/2757</span>
+                      </div>
+                  </div>
+                   <div class="form-item">
+                      <label for="siteField">Site</label>
+                      <div class="span-div">
+                        <span id="siteValue">001</span>
+                      </div>
+                  </div> 
+                   <div class="form-item">
+                      <label for="payeeField">Payee</label>
+                      <div class="span-div">
+                        <span id="payeeValue">129048</span>
+                      </div>
+                  </div>
+                  <div class="form-item">
+                      <label for="payeePricelistField">Payee Pricelist</label>
+                      <div class="span-div">
+                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%;">
+                          <option value="" disabled selected>Select a Payee Pricelist</option>
+                           <option value="185516" >185516</option>
+                        </select>
+                      </div>
+                  </div> 
+              </div>
+              <div class="last-box">
+                <div class="input-container">
+                  <div class="input-box">
+                    <label for="unscheduledVisits">Unscheduled Visits <span class="colon">:</span></label>
+                    <input type="text" id="unscheduledVisits"  />
+                  </div>
+               
+                  <div class="input-box">
+                    <label for="cycles">Cycles <span class="colon">:</span></label>
+                    <input type="text" id="cycles"  />
+                  </div>
+               
+                  <div class="input-box">
+                    <label for="followup">Followup <span class="colon">:</span></label>
+                    <input type="text" id="followup"  />
+                  </div>
+                  <div class="input-box">
+                    <label for="Overhead">Overhead %<span class="colon">:</span></label>
+                    <input type="text" id="Overhead"  [(ngModel)]="Overhead"/>
+                   
+                  </div>
+                  <div class="input-box">
+                    <label for="Retention">Retention % <span class="colon">:</span></label>
+                    <input type="text" id="Retention"  [(ngModel)]="Retention"/>
+                    
+                  </div>
+                </div>
+                <div class="button-container">
+                  <button id="generateBudgetButton" (click)="onGenerateBudget()">Generate Budget</button>
+                </div>
+              </div>
+              </div>
+            </div>
+     <div>
+        <div><h3>Budget to be entered on APECS</h3></div>
+         <div>
+
+          <table>
+            <thead>
+              <tr>
+              <th>Visit Def Desc</th>
+    <th>Entitlement Name</th>
+     <th>Rate</th>
+    <th>Overhead Value</th>
+   
+    <th>Final rate</th>	
+    <th>Retention %</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of data ">
+                
+
+                <td>
+                  {{row["VISIT NAME"]}}
+                </td>
+                 <td>{{row.index}}-  {{row["VISIT NAME"]}}</td>
+                
+
+                  <td>
+                       {{row["VISIT COST"]}}
+                  </td>
+                  <td>{{row.overhead}}</td>
+                   <td>{{row["Final Visit Rate"]}}</td>
+                   <td>{{row.Retention}}</td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+        <div class="btn-container">
+                  <button id="generateSubmitButton" (click)="openModel()" >Save To Apecs</button>
+               
+              
+                  <button id="downloadExcelButton" >Download Excel</button>
+                
+    </div>
+    
+        </div>
+</div>
+
+
+<!-- feedback-modal.component.html -->
+<div class="modal-overlay" *ngIf="showFeedbackModal">
+  <div class="modal">
+   
+    <h2>Budget Has Been Saved To Apecs</h2>
+
+    <label>On a scale of 1-5, how would you rate the result?</label>
+    <div class="stars">
+      <span
+        *ngFor="let star of starsArray; let i = index"
+        class="star"
+        [class.selected]="selectedRating > i"
+        (click)="selectRating(i + 1)"
+        >&#9733;</span
+      >
+    </div>
+
+    <label for="accuracy">How accurate do you think the results were? (0–100%)</label>
+    <input
+      type="number"
+      id="accuracy"
+      min="0"
+      max="100"
+      [(ngModel)]="accuracy"
+    />
+
+    <label for="feedback">Feedback</label>
+    <textarea
+      id="feedback"
+      maxlength="2000"
+      placeholder="Write your feedback..."
+      [(ngModel)]="feedback"
+    ></textarea>
+
+    <div class="modal-buttons">
+      <button  (click)="submitFeedback()" style="border: 3px solid #00867d;">Ok</button>
+      <button  (click)="closeModal()" style="border: 3px solid #00867d;">Cancel</button>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Thank You Modal class="ok-btn" class="cancel-btn"       class="ok-btn"-->
+<div class="modal-overlay" *ngIf="showThankYouModal">
+  <div class="modal thank-you-message">
+    <h2>Thank You for your valuable feedback!</h2>
+    <button  (click)="closeThankYouModal()" style="display: flex; justify-content: center;margin-left: 35%;">Close</button>
+  </div>
+</div>
