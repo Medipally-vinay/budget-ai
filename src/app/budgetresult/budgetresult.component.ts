@@ -19,10 +19,54 @@ export class BudgetresultComponent {
   Overhead:any="";
   data:any[]=[ 
       ]
- tablesData: any[] =  [
-   
-    
-  ];
+
+//       data: any[] = [
+//   {
+//     "Visit Def Desc": "Screening Visit",
+//     "Entitlement Name": "Consultation",
+//     "Rate": 1500,
+//     "Overhead Value": "10%",
+//     "Final Rate": 1650,
+//     "Retention %": "95%"
+//   },
+//   {
+//     "Visit Def Desc": "Baseline Visit",
+//     "Entitlement Name": "Blood Test",
+//     "Rate": 800,
+//     "Overhead Value": "8%",
+//     "Final Rate": 864,
+//     "Retention %": "90%"
+//   },
+//   {
+//     "Visit Def Desc": "Week 4 Follow-up",
+//     "Entitlement Name": "MRI Scan",
+//     "Rate": 2500,
+//     "Overhead Value": "12%",
+//     "Final Rate": 2800,
+//     "Retention %": "92%"
+//   },
+//   {
+//     "Visit Def Desc": "Week 8 Assessment",
+//     "Entitlement Name": "Physical Exam",
+//     "Rate": 1000,
+//     "Overhead Value": "7%",
+//     "Final Rate": 1070,
+//     "Retention %": "93%"
+//   },
+//   {
+//     "Visit Def Desc": "End of Study Visit",
+//     "Entitlement Name": "Final Review",
+//     "Rate": 1200,
+//     "Overhead Value": "9%",
+//     "Final Rate": 1308,
+//     "Retention %": "96%"
+//   }
+// ];
+
+ tablesData: any[] = [
+  
+];
+
  selectedStudy!: string;
  selectedSite!: string;
   selectedPayee!: string;
@@ -41,7 +85,7 @@ ngOnInit(){
     this.selectedIndex = this.selectedIndex === index ? null : index;
   }
 
-  onGenerateBudget() {
+   onGenerateBudget() {
     if (this.selectedIndex === null) {
       alert('Please select a table.');
       return;
@@ -74,10 +118,10 @@ ngOnInit(){
     // this.generateBudgetTableData(selectedTable);
   }
 
-  // generateBudgetTableData(table: any[]) {
-  //   // Implement this function or emit an event to parent
-  //   console.log('Generating budget for:', table);
-  // }
+  generateBudgetTableData(table: any[]) {
+    // Implement this function or emit an event to parent
+    console.log('Generating budget for:', table);
+   }
 
 
    showFeedbackModal = false;      // Set to true to show modal by default

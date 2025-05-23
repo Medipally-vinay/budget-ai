@@ -3,9 +3,77 @@
     flex-direction: row;
     /* margin:2%; */
     background-color: white;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     padding: 2%;
 }
+
+
+.backbutton {
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+.backbuttonimg {
+  width: 40px;
+  height: 40px;
+}
+.table-choices-list {
+  min-width: 428px;
+  margin-right: 2%;
+}
+
+.table-choice {
+  margin-bottom: 30px;
+}
+
+.table-choice input[type="radio"] {
+  margin-right: 10px;
+}
+
+/* Caret for expand/collapse */
+.caret {
+  margin-right: 8px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+/* Collapsible label */
+.choice-label {
+  font-weight: bold;
+  margin-right: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* The table itself */
+.styled-budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin-top: 20px;
+  max-height: 625px;
+  overflow-y: auto;
+}
+
+/* Table header */
+.styled-budget-table th {
+  min-width: 85px;
+  background-color: #00867d;
+  color: white;
+}
+
+/* Table cells */
+.styled-budget-table td {
+  text-align: left;
+  padding: 5px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+}
+
   h3 {
         display: flex; /* Enable flexbox */
         justify-content: center; /* Horizontally center the content */
@@ -82,6 +150,7 @@
 
 .table-wrapper{
         margin-left: 0px;
+            margin-right: 2%;
 }
 
 
@@ -393,5 +462,199 @@ textarea {
 .btn-container{
   display: flex;
   justify-content:space-around;
+}
+ 
+  #uploadForm label {
+      font-weight: bold;
+      text-align: right;
+      margin-right: 10px;
+      margin-top: 7px;
+    }
+ 
+    /* Style inputs and selects */
+    #uploadForm input,
+    #uploadForm select,
+    #uploadForm button {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+ 
+    /* Style the button */
+    #uploadForm button {
+      grid-column: span 2; /* Make the button span across the form */
+      background-color: #00867d;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+ 
+    #uploadForm button:hover {
+        background-color: #d6dfe6;
+        color: #333;
+    }
+ 
+      form {
+        margin-top: 20px;
+      }
+ 
+      label {
+        display: block;
+        /* margin-top: 20px; */
+        font-weight: bold;
+      }
+ 
+      input[type="file"],
+      input[type="number"]
+      {
+        width: 95%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+ 
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+      
+        border-radius: 5px;
+        font-size: 16px;
+      }
+ 
+      input[type="file"] {
+        border: none;
+      }
+ 
+      button {
+        background-color: #00867d;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+ 
+      button:hover {
+        background-color: #d6dfe6;
+        color: #333;
+      }
+ 
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+      }
+ 
+      table th,
+      table td {
+        text-align: left;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        border: 1px solid #ddd;
+      }
+ 
+      table th {
+        font-family: Arial, sans-serif;
+        background-color: #00867d;
+        color: white;
+      }
+ 
+      table tr:nth-child(even) {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+ 
+ 
+ 
+  #generatedBudgetTable, #outputTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+}
+ 
+#generatedBudgetTable th, #outputTable th,
+#generatedBudgetTable td, #outputTable td {
+  text-align: left;
+  padding: 5px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  font-size: 12px;
+}
+ 
+#generatedBudgetTable th, #outputTable th {
+  min-width: 85px;
+  height: 30px;
+  font-size: 16px;
+  background-color: #00867d;
+  color: white;
+}
+ 
+#generatedBudgetTable tr:nth-child(even), #outputTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+ 
+/* Apply the fixed height and scrolling to the tables directly */
+#generatedBudgetTable, #outputTable {
+  max-height: 580px; /* Adjust this to the desired height */
+  overflow-y: auto;
+  display: block;/* Makes the tbody scrollable */
+  width: 100%;
+}
+ 
+#generatedBudgetTable thead, #outputTable thead {
+  background-color: #00867d;
+  color: white;
+}
+ 
+#generatedBudgetTable tbody, #outputTable tbody {
+  /* display: block; */
+  max-height: 300px; /* Adjust to your preferred value */
+  overflow-y: auto; /* Enables scrolling for the table body */
+}
+ 
+      .no-data {
+        text-align: center;
+        font-size: 18px;
+        color: #666;
+        margin-top: 20px;
+      }
+      .hidden {
+    display: none;
+    }
+ 
+    /* Style the form item container */
+#form-display {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+ 
+.form-item {
+    display: flex;
+    justify-content: space-between; /* Align label and value to opposite sides */
+    border-bottom: 1px solid black;
+    background: #00867d;
+    color: white;
+    padding-left: 5px;
+}
+ 
+.form-item label {
+    font-weight: bold;
+    width: 50%;
+    border-right: 1px solid black;
+    margin-top: 3px;
+}
+ 
+.form-item span {
+    width: 50%;
+    background: white;
+    color: black;
+    margin-top: 4px;
+    margin-left: 4px;
 }
  

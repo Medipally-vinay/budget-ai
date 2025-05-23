@@ -1,21 +1,28 @@
 <div class="component">
-    <div>
-      <img [routerLink]="['/']" src="assets/back.png" style="height: 40px; width: 40px; cursor: pointer;"> 
+    <div class="backbutton">
+      <img [routerLink]="['/']"  class="backbuttonimg" src="assets/back.png" > 
     </div>
     
 
-     <div class="table-choices-list" style="min-width: 428px;">
-        <div><h3>Budget Extract From Contract</h3></div>
-     <div *ngFor="let item of tablesData; index as idx" class="table-choice">
-     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
-     <span (click)="onTableToggle(idx)" style="cursor: pointer;">
+  <div class="table-choices-list" style="min-width: 428px;">
+  <div><h3>Budget Extract From Contract</h3></div>
+  <div *ngFor="let item of tablesData; index as idx" class="table-choice">
+    <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
+    <span 
+      (click)="onTableToggle(idx)" 
+      class="caret"
+      style="cursor: pointer;"
+    >
       {{ selectedIndex === idx ? '▼' : '▶' }}
-     </span>
-     <span (click)="onTableToggle(idx)" class="label">
+    </span>
+    <span 
+      (click)="onTableToggle(idx)" 
+      class="choice-label"
+    >
       {{ item.description }} - {{ item.overall_confidence }} Confidence Level
-     </span>
+    </span>
 
-     <table *ngIf="selectedIndex === idx" class="styled-budget-table">
+    <table *ngIf="selectedIndex === idx" class="styled-budget-table">
       <thead>
         <tr>
           <th>Visit</th>
@@ -24,23 +31,18 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let visit
-        of item.table">
-          
+        <ng-container *ngFor="let visit of item.table">
           <tr>
-
-          <td>{{ visit['VISIT NAME'] }}</td>
-      <td>{{ visit['VISIT COST'] }}</td>
-      <td>{{ visit.CONFIDENCE }}</td>
-
-
+            <td>{{ visit['VISIT NAME'] }}</td>
+            <td>{{ visit['VISIT COST'] }}</td>
+            <td>{{ visit.CONFIDENCE }}</td>
           </tr>
         </ng-container>
       </tbody>
     </table>
   </div>
 </div>
-        
+
     
     <div class="table-wrapper" style="min-width: 325px;">
               <div class="triple-container">
@@ -115,7 +117,7 @@
         <div><h3>Budget to be entered on APECS</h3></div>
          <div>
 
-          <table>
+          <table id="generatedBudgetTable">
             <thead>
               <tr>
               <th>Visit Def Desc</th>
