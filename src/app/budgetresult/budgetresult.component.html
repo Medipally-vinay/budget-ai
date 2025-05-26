@@ -73,9 +73,9 @@
                   <div class="form-item">
                       <label for="payeePricelistField">Payee Pricelist</label>
                       <div class="span-div">
-                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%;">
-                          <option value="" disabled selected>Select a Payee Pricelist</option>
-                           <option value="185516" >185516</option>
+                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 16px;">
+                          <option value="" disabled selected><span>Select a Payee Pricelist</span></option>
+                           <option value="185516" ><span>185516</span></option>
                         </select>
                       </div>
                   </div> 
@@ -98,7 +98,7 @@
                   </div>
                   <div class="input-box">
                     <label for="Overhead">Overhead %<span class="colon">:</span></label>
-                    <input type="number" id="Overhead" min="0" max="999" oninput="this.value = this.value.slice(0, 3);" [(ngModel)]="Overhead"/>
+                    <input type="number" id="Overhead"    [(ngModel)]="Overhead"/>
                    
                   </div>
                   <div class="input-box">

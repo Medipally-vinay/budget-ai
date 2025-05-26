@@ -20,6 +20,7 @@
 .backbuttonimg {
   width: 40px;
   height: 40px;
+  cursor: pointer;
 }
 .table-choices-list {
   min-width: 428px;
@@ -205,7 +206,7 @@
 .span-div{
   background: white;
   color: black;
-  width: 50%;
+      width: 81%;
   display: flex;
   justify-content: flex-start;
 }
@@ -220,7 +221,7 @@
 .input-container {
   display: flex;
   flex-direction: column; /* Stack items vertically */
-  gap: 22px; /* Space between each label-input pair */
+  gap: 0px; /* Space between each label-input pair */
   margin: 20px 0;
 }
  
@@ -233,6 +234,7 @@
 .input-box label {
   font-weight: bold;
   display: flex;
+  margin-bottom: 4%;
   gap: 5px; /* Add gap between label text and colon */
   align-items: center; /* Ensure the text and colon align properly */
 }
@@ -342,12 +344,12 @@ textarea {
   text-align: right;
   margin-top: 15px;
   display: flex;
-  gap: 64%;
+  gap: 60%;
 }
 
 .modal-buttons button {
   padding: 8px 16px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -372,12 +374,12 @@ textarea {
   height: 4%;
 }
 
-.thank-you-message h2 {
+/* .thank-you-message h2 {
   color: #4caf50;
   margin-bottom: 0;
-}
+} */
 .thank-you-message h2 {
-  color: #43a047; /* Material green shade */
+  color: #333; /* Material green shade */
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
