@@ -109,6 +109,7 @@
 
 .table-choice {
   margin-bottom: 30px;
+  margin-top:30px;
 }
 
 .label {
@@ -341,7 +342,7 @@ textarea {
   text-align: right;
   margin-top: 15px;
   display: flex;
-  gap: 76%;
+  gap: 64%;
 }
 
 .modal-buttons button {
@@ -529,14 +530,14 @@ textarea {
         border: none;
       }
  
-      button {
+      /* button {
         background-color: #00867d;
         color: white;
         font-weight: bold;
         cursor: pointer;
         transition: background-color 0.3s ease;
       }
- 
+  */
       button:hover {
         background-color: #d6dfe6;
         color: #333;
@@ -587,9 +588,9 @@ textarea {
 }
  
 #generatedBudgetTable th, #outputTable th {
-  min-width: 85px;
-  height: 30px;
-  font-size: 16px;
+  min-width: 93px;
+    height: 30px;
+    font-size: 14px;
   background-color: #00867d;
   color: white;
 }

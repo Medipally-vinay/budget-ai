@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataUploadService {
-private apiurl='http://192.168.1.52:5000/ask';
-private apiurl2='http://192.168.1.52:5000/calculate';
+private apiurl='http://192.168.1.79:5000/ask';
+private apiurl2='http://192.168.1.79:5000/calculate';
+// private apiurl='http://192.168.1.77:5000/ask';
+// private apiurl2='http://192.168.1.77:5000/calculate'
   constructor(private http:HttpClient) { }
   uploadData(file: File, pageNumber: string, version: string):Observable<any>{
     const formData=new FormData();

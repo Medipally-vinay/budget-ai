@@ -62,7 +62,7 @@ export class FormComponentComponent {
       });
 
     // Navigate to result page
-    // this.router.navigate(['/budgetresult']);
+    this.router.navigate(['/budgetresult']);
   }
 }
 

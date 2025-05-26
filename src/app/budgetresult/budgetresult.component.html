@@ -26,16 +26,16 @@
       <thead>
         <tr>
           <th>Visit</th>
-          <th>Rate</th>
-          <th>Confidence</th>
+          <th >Rate</th>
+          <th >Confidence</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let visit of item.table">
           <tr>
             <td>{{ visit['VISIT NAME'] }}</td>
-            <td>{{ visit['VISIT COST'] }}</td>
-            <td>{{ visit.CONFIDENCE }}</td>
+            <td style="text-align: right;">{{ visit['VISIT COST'] }}</td>
+            <td style="text-align: right;">{{ visit.CONFIDENCE }}</td>
           </tr>
         </ng-container>
       </tbody>
@@ -84,26 +84,26 @@
                 <div class="input-container">
                   <div class="input-box">
                     <label for="unscheduledVisits">Unscheduled Visits <span class="colon">:</span></label>
-                    <input type="text" id="unscheduledVisits"  />
+                    <input type="number" id="unscheduledVisits"  />
                   </div>
                
                   <div class="input-box">
                     <label for="cycles">Cycles <span class="colon">:</span></label>
-                    <input type="text" id="cycles"  />
+                    <input type="number" id="cycles"  />
                   </div>
                
                   <div class="input-box">
                     <label for="followup">Followup <span class="colon">:</span></label>
-                    <input type="text" id="followup"  />
+                    <input type="number" id="followup"  />
                   </div>
                   <div class="input-box">
                     <label for="Overhead">Overhead %<span class="colon">:</span></label>
-                    <input type="text" id="Overhead"  [(ngModel)]="Overhead"/>
+                    <input type="number" id="Overhead" min="0" max="999" oninput="this.value = this.value.slice(0, 3);" [(ngModel)]="Overhead"/>
                    
                   </div>
                   <div class="input-box">
                     <label for="Retention">Retention % <span class="colon">:</span></label>
-                    <input type="text" id="Retention"  [(ngModel)]="Retention"/>
+                    <input type="number" id="Retention"  [(ngModel)]="Retention"/>
                     
                   </div>
                 </div>
@@ -122,10 +122,10 @@
               <tr>
               <th>Visit Def Desc</th>
     <th>Entitlement Name</th>
-     <th>Rate</th>
-    <th>Overhead Value</th>
+     <th >Rate</th>
+    <th >Overhead Value</th>
    
-    <th>Final rate</th>	
+    <th >Final rate</th>	
     <th>Retention %</th></tr>
             </thead>
             <tbody>
@@ -138,18 +138,18 @@
                  <td>{{row.index}}-  {{row["VISIT NAME"]}}</td>
                 
 
-                  <td>
+                  <td style="text-align: right;">
                        {{row["VISIT COST"]}}
                   </td>
-                  <td>{{row.overhead}}</td>
-                   <td>{{row["Final Visit Rate"]}}</td>
-                   <td>{{row.Retention}}</td>
+                  <td style="text-align: right;">{{row.overhead}}</td>
+                   <td style="text-align: right;">{{row["Final Visit Rate"]}}</td>
+                   <td style="text-align: right;">{{row.Retention}}</td>
               </tr>
             </tbody>
           </table>
          </div>
         <div class="btn-container">
-                  <button id="generateSubmitButton" (click)="openModel()" >Save To Apecs</button>
+                  <button id="generateSubmitButton" (click)="openModel()" >Save To APECS</button>
                
               
                   <button id="downloadExcelButton" >Download Excel</button>
@@ -206,6 +206,6 @@
 <div class="modal-overlay" *ngIf="showThankYouModal">
   <div class="modal thank-you-message">
     <h2>Thank You for your valuable feedback!</h2>
-    <button  (click)="closeThankYouModal()" style="display: flex; justify-content: center;margin-left: 35%;">Close</button>
+    <button  (click)="closeThankYouModal()" style="display: flex; justify-content: center;margin-left: 35%; width: 25%;">Close</button>
   </div>
 </div>
