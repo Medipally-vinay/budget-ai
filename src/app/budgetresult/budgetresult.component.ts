@@ -95,7 +95,7 @@ ngOnInit(){
     //   return;
     // }
     const selectedTable = this.tablesData[this.selectedIndex].table;
-    debugger
+    
     console.log(selectedTable);
     this.dataUploadService.budgetdata(selectedTable,this.Overhead,this.Retention).subscribe({
         next: (response: any) => {
@@ -106,7 +106,7 @@ ngOnInit(){
             response.updated_table[i]["index"] =i
           }
            this.data=response.updated_table;
-         debugger
+    
 
          
         },
@@ -117,7 +117,19 @@ ngOnInit(){
       });
     // this.generateBudgetTableData(selectedTable);
   }
+   editingCell: { row: number; column: string } | null = null;
 
+editCell(rowIndex: number, column: string) {
+  this.editingCell = { row: rowIndex, column };
+}
+
+isEditing(rowIndex: number, column: string): boolean {
+  return this.editingCell?.row === rowIndex && this.editingCell?.column === column;
+}
+
+stopEditing() {
+  this.editingCell = null;
+}
   generateBudgetTableData(table: any[]) {
     // Implement this function or emit an event to parent
     console.log('Generating budget for:', table);

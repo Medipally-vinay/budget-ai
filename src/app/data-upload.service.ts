@@ -21,7 +21,7 @@ private apiurl2='http://192.168.1.79:5000/calculate';
   }
   budgetdata(tabledata:any,overhead:string,retention:string)
   {
-    debugger
+
     const body:any = {}
     // const formData=new FormData();
     body["retention_percentage"] = retention
