@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedService } from '../shared.service';
 import { DataUploadService } from '../data-upload.service';
+import { audit } from 'rxjs';
+import { response } from 'express';
 @Component({
   selector: 'app-budgetresult',
   standalone: true,
@@ -72,10 +74,13 @@ export class BudgetresultComponent {
   selectedPayee!: string;
 
   selectedIndex: number | null = null;
- 
+  audit:any=0;
 ngOnInit(){
   this.sharedService.data$.subscribe(value=>{
+    this.audit=value.find((obj: any)=>Object.keys(obj).length==1 && obj.hasOwnProperty("id"))
+
     this.tablesData=value;
+    console.log(this.tablesData);
    
   })
 }
@@ -116,6 +121,28 @@ ngOnInit(){
         }
       });
     // this.generateBudgetTableData(selectedTable);
+  }
+  onok(){
+    this.dataUploadService.audit(
+      
+      JSON.stringify(this.data),
+      JSON.stringify(this.selectedRating),
+      JSON.stringify(this.accuracy),
+      
+      // String(this.selectedRating),
+      // String(this.accuracy),
+      this.feedback,
+      this.audit.id
+    ).subscribe({
+      next:(response:any)=>
+      {
+        console.log(response);
+      },
+      error:(error:any)=>
+      {
+        console.error('failed to upload total data',error);
+      }
+    })
   }
    editingCell: { row: number; column: string } | null = null;
 
@@ -178,6 +205,7 @@ stopEditing() {
 
     this.showFeedbackModal = false;
     this.showThankYouModal = true;
+    this.onok();
   }
 
   // Close the thank you modal
