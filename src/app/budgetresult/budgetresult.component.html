@@ -6,7 +6,7 @@
 
   <div class="table-choices-list" style="min-width: 428px;">
   <div><h3>Budget Extract From Contract</h3></div>
-  <div *ngFor="let item of tablesData; index as idx" class="table-choice">
+  <div *ngFor="let item of tablesData.slice(0, tablesData.length - 1); index as idx" class="table-choice">
     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
     <span 
       (click)="onTableToggle(idx)" 
@@ -120,32 +120,104 @@
           <table id="generatedBudgetTable">
             <thead>
               <tr>
+                <th style="min-width: 20px;">S.No</th>
               <th>Visit Def Desc</th>
     <th>Entitlement Name</th>
-     <th >Rate</th>
+     <th style="min-width: 20px;">Rate</th>
     <th >Overhead Value</th>
    
     <th >Final rate</th>	
     <th>Retention %</th></tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of data ">
-                
+  <tr *ngFor="let row of data; let rowIndex = index">
+    <td>{{rowIndex}}</td>
+    <td (click)="editCell(rowIndex, 'VISIT NAME')">
+      <ng-container *ngIf="!isEditing(rowIndex, 'VISIT NAME'); else visitNameInput">
+        {{ row["VISIT NAME"] }}
+      </ng-container>
+      <ng-template #visitNameInput>
+        <input [(ngModel)]="row['VISIT NAME']"
+               (blur)="stopEditing()"
+               (keydown.enter)="stopEditing()"
+               autofocus  style="min-width: 20px;
+    max-width: 86px;
+    height: auto;"/>
+      </ng-template>
+    </td>
 
-                <td>
-                  {{row["VISIT NAME"]}}
-                </td>
-                 <td>{{row.index}}-  {{row["VISIT NAME"]}}</td>
-                
+    <td (click)="editCell(rowIndex, 'index')">
+      <ng-container *ngIf="!isEditing(rowIndex, 'index'); else indexInput">
+        {{ row.index }} - {{ row["VISIT NAME"] }}
+      </ng-container>
+      <ng-template #indexInput>
+        <input [(ngModel)]="row.index"
+               (blur)="stopEditing()"
+               (keydown.enter)="stopEditing()"
+               autofocus  style="min-width: 20px;
+    max-width: 86px;
+    height: auto;"/>
+      </ng-template>
+    </td>
 
-                  <td style="text-align: right;">
-                       {{row["VISIT COST"]}}
-                  </td>
-                  <td style="text-align: right;">{{row.overhead}}</td>
-                   <td style="text-align: right;">{{row["Final Visit Rate"]}}</td>
-                   <td style="text-align: right;">{{row.Retention}}</td>
-              </tr>
-            </tbody>
+    <td style="text-align: right;" (click)="editCell(rowIndex, 'VISIT COST')">
+      <ng-container *ngIf="!isEditing(rowIndex, 'VISIT COST'); else costInput">
+        {{ row["VISIT COST"] }}
+      </ng-container>
+      <ng-template #costInput>
+        <input [(ngModel)]="row['VISIT COST']"
+               (blur)="stopEditing()"
+               (keydown.enter)="stopEditing()"
+               autofocus  style="min-width: 20px;
+    max-width: 86px;
+    height: auto;"/>
+      </ng-template>
+    </td>
+
+    <td style="text-align: right;" (click)="editCell(rowIndex, 'overhead')">
+      <ng-container *ngIf="!isEditing(rowIndex, 'overhead'); else overheadInput">
+        {{ row.overhead }}
+      </ng-container>
+      <ng-template #overheadInput>
+        <input [(ngModel)]="row.overhead"
+               (blur)="stopEditing()"
+               (keydown.enter)="stopEditing()"
+               autofocus  style="min-width: 20px;
+    max-width: 86px;
+    height: auto;" />
+      </ng-template>
+    </td>
+
+    <td style="text-align: right;" (click)="editCell(rowIndex, 'Final Visit Rate')">
+      <ng-container *ngIf="!isEditing(rowIndex, 'Final Visit Rate'); else finalRateInput">
+        {{ row["Final Visit Rate"] }}
+      </ng-container>
+      <ng-template #finalRateInput>
+        <input [(ngModel)]="row['Final Visit Rate']"
+               (blur)="stopEditing()"
+               (keydown.enter)="stopEditing()"
+               autofocus  style="min-width: 20px;
+    max-width: 86px;
+    height: auto;"/>
+      </ng-template>
+    </td>
+
+    <td style="text-align: right;" (click)="editCell(rowIndex, 'Retention')">
+      <ng-container *ngIf="!isEditing(rowIndex, 'Retention'); else retentionInput">
+        {{ row.Retention }}
+      </ng-container>
+      <ng-template #retentionInput>
+        <input [(ngModel)]="row.Retention"
+               (blur)="stopEditing()"
+               (keydown.enter)="stopEditing()"
+               autofocus style="min-width: 20px;
+    max-width: 86px;
+    height: auto;" />
+      </ng-template>
+    </td>
+  </tr>
+</tbody>
+
           </table>
          </div>
         <div class="btn-container">
