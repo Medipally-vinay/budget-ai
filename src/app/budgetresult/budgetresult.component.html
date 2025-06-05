@@ -38,8 +38,12 @@
             <td style="text-align: right;">{{ visit.CONFIDENCE }}</td>
           </tr>
         </ng-container>
+        
       </tbody>
+      <td style="font-weight: bold;">Total Visit Cost</td>
+      <td style="font-weight: bold;text-align: end;">{{item.total_visit_cost}}</td>
     </table>
+    
   </div>
 </div>
 
@@ -106,6 +110,12 @@
                     <input type="number" id="Retention"  [(ngModel)]="Retention"/>
                     
                   </div>
+                  
+                   <div class="input-box">
+                    <label for="Entitlement">Entitlement Set <span class="colon">:</span></label>
+                    <input type="text"  id="Entitlement"  [(ngModel)]="Entitlement"/>
+                    
+                  </div>
                 </div>
                 <div class="button-container">
                   <button id="generateBudgetButton" (click)="onGenerateBudget()">Generate Budget</button>
@@ -131,7 +141,7 @@
             </thead>
             <tbody>
   <tr *ngFor="let row of data; let rowIndex = index">
-    <td>{{rowIndex}}</td>
+    <td>{{rowIndex + 1}}</td>
     <td (click)="editCell(rowIndex, 'VISIT NAME')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT NAME'); else visitNameInput">
         {{ row["VISIT NAME"] }}

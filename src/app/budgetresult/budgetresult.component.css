@@ -234,7 +234,7 @@
 .input-box label {
   font-weight: bold;
   display: flex;
-  margin-bottom: 4%;
+  margin-bottom: 0%;
   gap: 5px; /* Add gap between label text and colon */
   align-items: center; /* Ensure the text and colon align properly */
 }
@@ -328,7 +328,7 @@
   color: gold;
 }
 
-input[type="number"], textarea {
+input[type="number"],input[type="text"], textarea {
   width: 100%;
   padding: 8px;
   margin: 8px 0;
@@ -363,9 +363,7 @@ textarea {
 
 }
 
-#close-btn {
-  
-}
+
 
 .cancel-btn {
   background-color: #f44336;
@@ -508,8 +506,7 @@ textarea {
         font-weight: bold;
       }
  
-      input[type="file"],
-      input[type="number"]
+      input[type="file"]
       {
         width: 95%;
         padding: 10px;
@@ -590,7 +587,7 @@ textarea {
 }
  
 #generatedBudgetTable th, #outputTable th {
-  min-width: 93px;
+  min-width: 96px;
     height: 30px;
     font-size: 14px;
   background-color: #00867d;

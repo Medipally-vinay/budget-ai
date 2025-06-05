@@ -13,4 +13,10 @@ export class SharedService {
   {
     this.datasubject.next(data);
   }
+  private studynum=new BehaviorSubject<any>('');
+  study$=this.studynum.asObservable();
+  setStudy(data:any)
+  {
+    this.studynum.next(data);
+  }
 }

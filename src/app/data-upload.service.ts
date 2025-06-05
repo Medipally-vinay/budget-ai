@@ -23,17 +23,19 @@ export class DataUploadService {
     const body:any = {}
     // const formData=new FormData();
     body["retention_percentage"] = retention
+    
     body["overhead_percentage"] = overhead
     body["table_data"] = tabledata
     return this.http.post<any>(`${this.baseUrl}/calculate`,body);
   }
-  audit(data:string,rating:string,percentage:string,comments:string,auditId:number)
+  audit(data:string,rating:string,percentage:string,studyId:any,comments:string,auditId:number)
   {
     const body:any={}
    
   body["finalisedData"] = data
   body["rating"]=rating
   body["accuracyPercentage"] = percentage
+  body["studyId"]=studyId
   body["comments"]=comments
   body["auditId"]=auditId
   return this.http.post<any>(`${this.baseUrl}/audit`,body);

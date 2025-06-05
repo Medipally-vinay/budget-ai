@@ -19,6 +19,7 @@ export class BudgetresultComponent {
   }
   Retention:any='';
   Overhead:any="";
+  Entitlement:string="";
   data:any[]=[ 
       ]
 
@@ -65,14 +66,12 @@ export class BudgetresultComponent {
 //   }
 // ];
 
- tablesData: any[] = [
-  
-];
+ tablesData: any[] = [];
 
  selectedStudy!: string;
  selectedSite!: string;
   selectedPayee!: string;
-
+  studynum:any='';
   selectedIndex: number | null = null;
   audit:any=0;
 ngOnInit(){
@@ -81,11 +80,33 @@ ngOnInit(){
 
     this.tablesData=value;
     console.log(this.tablesData);
+      this.calculateTotalVisitCosts();
    
   })
+  this.sharedService.study$.subscribe(value=>{
+    this.studynum=value;
+  })
+
 }
+  // Function to remove currency symbols and parse number
+  parseCost(costStr: string): number {
+    return parseFloat(costStr.replace(/[€,]/g, '').replace(/\s/g, ''));
+  }
 
-
+  // Add total_visit_cost (as number) to each object
+  calculateTotalVisitCosts(): void {
+   
+    this.tablesData.forEach(item => {
+      if (Array.isArray(item.table)) {
+        const total = item.table.reduce((sum:number, row:any) => {
+          const cost = this.parseCost(row['VISIT COST']);
+          return sum + (isNaN(cost) ? 0 : cost);
+        }, 0);
+        console.log("total sum",total);
+        item.total_visit_cost = total.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      }
+    });
+  }
   onTableToggle(index: number) {
     this.selectedIndex = this.selectedIndex === index ? null : index;
   }
@@ -128,7 +149,7 @@ ngOnInit(){
       JSON.stringify(this.data),
       JSON.stringify(this.selectedRating),
       JSON.stringify(this.accuracy),
-      
+      JSON.stringify(this.studynum),
       // String(this.selectedRating),
       // String(this.accuracy),
       this.feedback,
