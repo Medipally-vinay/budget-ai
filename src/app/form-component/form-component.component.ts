@@ -18,6 +18,7 @@ export class FormComponentComponent {
   pageNumber: string = '';
   version: string = '';
   loadinData :boolean = false;
+  studynum:any='';
   constructor(private router: Router,private dataUploadService: DataUploadService,private sharedService:SharedService) {}
   
 
@@ -51,6 +52,7 @@ export class FormComponentComponent {
           this.loadinData=false;
           console.log('Upload successful:', response);
           this.sharedService.setData(response);
+          this.sharedService.setStudy(this.studynum);
           
           this.router.navigate(['/budgetresult']);
         },
