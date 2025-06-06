@@ -83,6 +83,19 @@
                         </select>
                       </div>
                   </div> 
+                   <div class="form-item">
+                      <label for="entitlement">Entitlement Sets</label>
+                      <div class="span-div">
+                        <span id="entitlement"></span>
+                      </div>
+                  </div>
+                   <div class="form-item">
+                      <label for="schedules">Schedules</label>
+                      <div class="span-div">
+                        <span id="schedules"></span>
+                      </div>
+                  </div>
+
               </div>
               <div class="last-box">
                 <div class="input-container">
@@ -111,11 +124,11 @@
                     
                   </div>
                   
-                   <div class="input-box">
+                   <!-- <div class="input-box">
                     <label for="Entitlement">Entitlement Set <span class="colon">:</span></label>
                     <input type="text"  id="Entitlement"  [(ngModel)]="Entitlement"/>
                     
-                  </div>
+                  </div> -->
                 </div>
                 <div class="button-container">
                   <button id="generateBudgetButton" (click)="onGenerateBudget()">Generate Budget</button>
