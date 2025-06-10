@@ -26,7 +26,7 @@
       <thead>
         <tr>
           <th>Visit</th>
-          <th >Rate</th>
+          <th >{{ +item.Overhead > 0 ? 'Rate (with OH - ' + item.Overhead + ')' : 'Rate (without OH)' }} </th>
           <th >Confidence</th>
         </tr>
       </thead>
@@ -59,42 +59,88 @@
                   <div class="form-item">
                       <label for="studyField">Study</label>
                       <div class="span-div">
-                        <span id="studyValue">9999/2757</span>
+                        <!-- <span id="studyValue">9999/2757</span> -->
+                        <select id="studyValue" name="studyValue"  style="width: 100%; font-size: 16px; padding:5px; border: 0px;">
+                          <option value="" disabled selected><span>Select a Study value</span></option>
+                          <option value="0050/0112" ><span>0050/0112</span></option>
+                           <option value="0050/0114" ><span>0050/0114</span></option>
+                           <option value="0050/0115"><span>0050/0115</span></option>
+                            <option value="0050/0117"><span>0050/0117</span></option>
+                            <option value="0050/0120"><span>0050/0120</span></option>
+                        </select>
                       </div>
                   </div>
                    <div class="form-item">
                       <label for="siteField">Site</label>
                       <div class="span-div">
-                        <span id="siteValue">001</span>
+                      
+                         <select id="siteValue" name="siteValue"  style="width: 100%; font-size: 16px; padding:5px ;border: 0px;">
+                          <option value="" disabled selected><span>Select a Site</span></option>
+                          <option value="9009" ><span>9009</span></option>
+                           <option value="4007" ><span>4007</span></option>
+                           <option value="11010"><span>11010</span></option>
+                            <option value="11004"><span>11004</span></option>
+                            <option value="8006"><span>8006</span></option>
+                        </select>
                       </div>
                   </div> 
                    <div class="form-item">
                       <label for="payeeField">Payee</label>
                       <div class="span-div">
-                        <span id="payeeValue">129048</span>
+                     
+                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 16px; padding:5px;border: 0px; ">
+                          <option value="" disabled selected><span>Select a Payee Name</span></option>
+                           <option value="Clinical" ><span>Clinical Research Center of Nevada</span></option>
+                           <option value="Bluegrass" ><span>Bluegrass Clinical Research</span></option>
+                           <option value="Advance" ><span>Advance In Health</span></option>
+                           <option value="Odyssey" ><span>Odyssey Research Service</span></option>
+                   
+                        </select>
+                      </div>
+                  </div>
+                   <div class="form-item">
+                      <label for="schedules">Schedules</label>
+                      <div class="span-div">
+                        
+                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 16px; padding:5px; border: 0px;">
+                          <option value="" disabled selected><span>Select a Schedule</span></option>
+                           <option value="Arm 1 + PK Sampling" ><span>Arm 1 + PK Sampling</span></option>
+                           <option value="Arm 2 (Gemcitabine)" ><span>Arm 2 (Gemcitabine)</span></option>
+                           <option value="Arm 2 (Bendamustine)" ><span>Arm 2 (Bendamustine)</span></option>
+                           <option value="Standard" ><span>Standard</span></option>
+                   
+                        </select>
+                        
                       </div>
                   </div>
                   <div class="form-item">
                       <label for="payeePricelistField">Payee Pricelist</label>
                       <div class="span-div">
-                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 16px;">
+                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 16px; padding:5px ; border: 0px;">
                           <option value="" disabled selected><span>Select a Payee Pricelist</span></option>
-                           <option value="185516" ><span>185516</span></option>
+                           <option value="230" ><span>230</span></option>
+                           <option value="232" ><span>232</span></option>
+                           <option value="125" ><span>125</span></option>
+                           <option value="126" ><span>126</span></option>
+                           <option value="127" ><span>127</span></option>
                         </select>
                       </div>
                   </div> 
                    <div class="form-item">
                       <label for="entitlement">Entitlement Sets</label>
                       <div class="span-div">
-                        <span id="entitlement"></span>
+                       
+                        <select id="entitlement" name="entitlement"  style="width: 100%; font-size: 16px; padding:5px ; border: 0px;">
+                              <option value="" disabled selected><span>Select an Entitlement</span></option>
+                          <option value="12303" ><span>12303</span></option>
+                           <option value="12304" ><span>12304</span></option>
+                           <option value="12305"><span>12305</span></option>
+                            <option value="12542"><span>12542</span></option>
+                            <option value="12544"><span>12544</span></option>
+                        </select>
                       </div>
                   </div>
-                   <div class="form-item">
-                      <label for="schedules">Schedules</label>
-                      <div class="span-div">
-                        <span id="schedules"></span>
-                      </div>
-                  </div>
+                  
 
               </div>
               <div class="last-box">
