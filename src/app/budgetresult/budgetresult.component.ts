@@ -19,6 +19,7 @@ export class BudgetresultComponent {
   }
   Retention:any='';
   Overhead:any="";
+  Overheadval:number=0;
   Entitlement:string="";
   data:any[]=[ 
       ]
@@ -107,8 +108,9 @@ ngOnInit(){
       }
     });
   }
-  onTableToggle(index: number) {
+  onTableToggle(index: number,Overhead:number) {
     this.selectedIndex = this.selectedIndex === index ? null : index;
+    this.Overheadval=this.Overhead;
   }
 
    onGenerateBudget() {

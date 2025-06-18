@@ -1,0 +1,30 @@
+<div class="login-container">
+  <div class="login-box">
+    <h2>Welcome to Budget-AI</h2>
+
+    <div class="input-group">
+       <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+      <input type="text" placeholder="Username" [(ngModel)]="username" />
+    </div>
+
+    <div class="input-group">
+       <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10a4 4 0 10-8 0v2h8V9z" />
+          </svg>
+        </div>
+      <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" [(ngModel)]="password" />
+      <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></i>
+    </div>
+
+    <button (click)="handleSubmit()">Login</button>
+    <!-- <a class="request-access">Request Access</a> -->
+    <div class="powered">Powered by <strong>WINFO</strong></div>
+  </div>
+</div>

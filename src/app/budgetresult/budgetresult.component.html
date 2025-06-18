@@ -9,14 +9,14 @@
   <div *ngFor="let item of tablesData.slice(0, tablesData.length - 1); index as idx" class="table-choice">
     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
     <span 
-      (click)="onTableToggle(idx)" 
+      (click)="onTableToggle(idx,+item.Overhead)" 
       class="caret"
       style="cursor: pointer;"
     >
       {{ selectedIndex === idx ? '▼' : '▶' }}
     </span>
     <span 
-      (click)="onTableToggle(idx)" 
+      (click)="onTableToggle(idx,+item.Overhead)" 
       class="choice-label"
     >
       {{ item.description }} - {{ item.overall_confidence }} Confidence Level
@@ -26,7 +26,7 @@
       <thead>
         <tr>
           <th>Visit</th>
-          <th >{{ +item.Overhead > 0 ? 'Rate (with OH - ' + item.Overhead + ')' : 'Rate (without OH)' }} </th>
+          <th >{{ +item.Overhead > 0 ? 'Rate (with OH - ' + item.Overhead + '%)' : 'Rate (without OH)' }} </th>
           <th >Confidence</th>
         </tr>
       </thead>
@@ -60,7 +60,7 @@
                       <label for="studyField">Study</label>
                       <div class="span-div">
                         <!-- <span id="studyValue">9999/2757</span> -->
-                        <select id="studyValue" name="studyValue"  style="width: 100%; font-size: 16px; padding:5px; border: 0px;">
+                        <select id="studyValue" name="studyValue"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
                           <option value="" disabled selected><span>Select a Study value</span></option>
                           <option value="0050/0112" ><span>0050/0112</span></option>
                            <option value="0050/0114" ><span>0050/0114</span></option>
@@ -74,7 +74,7 @@
                       <label for="siteField">Site</label>
                       <div class="span-div">
                       
-                         <select id="siteValue" name="siteValue"  style="width: 100%; font-size: 16px; padding:5px ;border: 0px;">
+                         <select id="siteValue" name="siteValue"  style="width: 100%; font-size: 14px; padding:5px ;border: 0px;">
                           <option value="" disabled selected><span>Select a Site</span></option>
                           <option value="9009" ><span>9009</span></option>
                            <option value="4007" ><span>4007</span></option>
@@ -88,7 +88,7 @@
                       <label for="payeeField">Payee</label>
                       <div class="span-div">
                      
-                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 16px; padding:5px;border: 0px; ">
+                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px;border: 0px; ">
                           <option value="" disabled selected><span>Select a Payee Name</span></option>
                            <option value="Clinical" ><span>Clinical Research Center of Nevada</span></option>
                            <option value="Bluegrass" ><span>Bluegrass Clinical Research</span></option>
@@ -102,7 +102,7 @@
                       <label for="schedules">Schedules</label>
                       <div class="span-div">
                         
-                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 16px; padding:5px; border: 0px;">
+                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
                           <option value="" disabled selected><span>Select a Schedule</span></option>
                            <option value="Arm 1 + PK Sampling" ><span>Arm 1 + PK Sampling</span></option>
                            <option value="Arm 2 (Gemcitabine)" ><span>Arm 2 (Gemcitabine)</span></option>
@@ -116,7 +116,7 @@
                   <div class="form-item">
                       <label for="payeePricelistField">Payee Pricelist</label>
                       <div class="span-div">
-                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 16px; padding:5px ; border: 0px;">
+                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 14px; padding:5px ; border: 0px;">
                           <option value="" disabled selected><span>Select a Payee Pricelist</span></option>
                            <option value="230" ><span>230</span></option>
                            <option value="232" ><span>232</span></option>
@@ -130,7 +130,7 @@
                       <label for="entitlement">Entitlement Sets</label>
                       <div class="span-div">
                        
-                        <select id="entitlement" name="entitlement"  style="width: 100%; font-size: 16px; padding:5px ; border: 0px;">
+                        <select id="entitlement" name="entitlement"  style="width: 100%; font-size: 14px; padding:5px ; border: 0px;">
                               <option value="" disabled selected><span>Select an Entitlement</span></option>
                           <option value="12303" ><span>12303</span></option>
                            <option value="12304" ><span>12304</span></option>
@@ -161,12 +161,12 @@
                   </div>
                   <div class="input-box">
                     <label for="Overhead">Overhead %<span class="colon">:</span></label>
-                    <input type="number" id="Overhead"    [(ngModel)]="Overhead"/>
+                    <input type="number" id="Overhead"  [disabled]="Overheadval == 0 ? false: true"  [(ngModel)]="Overhead"/>
                    
                   </div>
                   <div class="input-box">
                     <label for="Retention">Retention % <span class="colon">:</span></label>
-                    <input type="number" id="Retention"  [(ngModel)]="Retention"/>
+                    <input type="number" id="Retention"   [(ngModel)]="Retention"/>
                     
                   </div>
                   
