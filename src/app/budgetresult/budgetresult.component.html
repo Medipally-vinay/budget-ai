@@ -203,7 +203,7 @@
     <td>{{rowIndex + 1}}</td>
     <td (click)="editCell(rowIndex, 'VISIT NAME')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT NAME'); else visitNameInput">
-        {{ row["VISIT NAME"] }}
+        {{ row.apecsVisitName}}
       </ng-container>
       <ng-template #visitNameInput>
         <input [(ngModel)]="row['VISIT NAME']"
@@ -217,7 +217,7 @@
 
     <td (click)="editCell(rowIndex, 'index')">
       <ng-container *ngIf="!isEditing(rowIndex, 'index'); else indexInput">
-        {{ row.index }} - {{ row["VISIT NAME"] }}
+        {{ row.entitlementName }}
       </ng-container>
       <ng-template #indexInput>
         <input [(ngModel)]="row.index"
@@ -231,7 +231,7 @@
 
     <td style="text-align: right;" (click)="editCell(rowIndex, 'VISIT COST')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT COST'); else costInput">
-        {{ row["VISIT COST"] }}
+        {{ row["Visit Cost"] }}
       </ng-container>
       <ng-template #costInput>
         <input [(ngModel)]="row['VISIT COST']"
