@@ -21,6 +21,114 @@ export class BudgetresultComponent {
   Overhead:any="";
   Overheadval:number=0;
   Entitlement:string="";
+  // dropdown:any = [
+  //   {
+  //     studyId: 'study-001',
+  //     site: [
+  //       {
+  //         siteId: 'site-001',
+  //         payee: [
+  //           {
+  //             payeeId: 'payee-001',
+  //             schedule: [
+  //               {
+  //                 scheduleId: 'schedule-001',
+  //                 priceList: [
+  //                   {
+  //                     priceListId: 1001,
+  //                     entitlementSet: [
+  //                       { entitlementSetId: 2001 },
+  //                       { entitlementSetId: 2002 },
+  //                     ],
+  //                   },
+  //                   {
+  //                     priceListId: 1002,
+  //                     entitlementSet: [
+  //                       { entitlementSetId: 2003 },
+  //                       { entitlementSetId: 2004 },
+  //                     ],
+  //                   },
+  //                 ],
+  //               },
+  //               {
+  //                 scheduleId: 'schedule-002',
+  //                 priceList: [
+  //                   {
+  //                     priceListId: 1003,
+  //                     entitlementSet: [
+  //                       { entitlementSetId: 2005 },
+  //                       { entitlementSetId: 2006 },
+  //                     ],
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             payeeId: 'payee-002',
+  //             schedule: [
+  //               {
+  //                 scheduleId: 'schedule-003',
+  //                 priceList: [
+  //                   {
+  //                     priceListId: 1004,
+  //                     entitlementSet: [{ entitlementSetId: 2007 }],
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         siteId: 'site-002',
+  //         payee: [
+  //           {
+  //             payeeId: 'payee-003',
+  //             schedule: [
+  //               {
+  //                 scheduleId: 'schedule-004',
+  //                 priceList: [
+  //                   {
+  //                     priceListId: 1005,
+  //                     entitlementSet: [
+  //                       { entitlementSetId: 2008 },
+  //                       { entitlementSetId: 2009 },
+  //                     ],
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     studyId: 'study-002',
+  //     site: [
+  //       {
+  //         siteId: 'site-003',
+  //         payee: [
+  //           {
+  //             payeeId: 'payee-004',
+  //             schedule: [
+  //               {
+  //                 scheduleId: 'schedule-005',
+  //                 priceList: [
+  //                   {
+  //                     priceListId: 1006,
+  //                     entitlementSet: [{ entitlementSetId: 2010 }],
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ];
   data:any[]=[ 
       ]
 //       data:any[]=[
@@ -122,6 +230,19 @@ export class BudgetresultComponent {
 //     "Retention %": "96%"
 //   }
 // ];
+ selectedStudyId: string = '';
+  selectedSiteId: string = '';
+  selectedPayeeId: string = '';
+  selectedScheduleId: string = '';
+  selectedPriceListId: string='';
+  selectedEntitlementSetId: string='' ;
+studies:any[]=[];
+sites:any=[];
+payees:any=[];
+schedules:any=[];
+priceLists:any=[];
+entitlementSets:any=[];
+
 
  tablesData: any[] = [];
 
@@ -143,8 +264,39 @@ ngOnInit(){
   this.sharedService.study$.subscribe(value=>{
     this.studynum=value;
   })
+  this.ongetstudy();
 
 }
+
+//dropdown values
+// get studies() {
+//     return this.dropdown;
+//   }
+
+  // get sites() {
+  //   const study = this.dropdown.find((s: { studyId: string; }) => s.studyId === this.selectedStudyId);
+  //   return study?.site || [];
+  // }
+
+  // get payees() {
+  //   const site = this.sites.find((s: { siteId: string; }) => s.siteId === this.selectedSiteId);
+  //   return site?.payee || [];
+  // }
+
+  // get schedules() {
+  //   const payee = this.payees.find((p: { payeeId: string; }) => p.payeeId === this.selectedPayeeId);
+  //   return payee?.schedule || [];
+  // }
+
+  // get priceLists() {
+  //   const schedule = this.schedules.find((s: { scheduleId: string; }) => s.scheduleId === this.selectedScheduleId);
+  //   return schedule?.priceList || [];
+  // }
+
+  // get entitlementSets() {
+  //   const priceList = this.priceLists.find((p: { priceListId: number | null; }) => p.priceListId === this.selectedPriceListId);
+  //   return priceList?.entitlementSet || [];
+  // }
 
 resetRetention(index:number)
 {
@@ -173,7 +325,81 @@ resetRetention(index:number)
     this.selectedIndex = this.selectedIndex === index ? null : index;
     this.Overheadval=this.Overhead;
   }
+  ongetstudy()
+  {
+    this.dataUploadService.getstudydropdown().subscribe({
+      next:(response:any)=>{
+        this.studies=response;
+      },
+      error: (error: any) => {
+          console.error('Failed ', error);
+        
+        }
+       
+    })
+  }
+  ongetsite()
+  {
+    this.dataUploadService.getsitedropdown(this.selectedStudyId).subscribe({
+      next:(response:any)=>{
+        this.sites=response;
+      },
+       error: (error: any) => {
+          console.error('Failed ', error);
+        
+        }
+    })
+  }
 
+  ongetpayee()
+  {
+     this.dataUploadService.getpayeedropdown(this.selectedSiteId).subscribe({
+      next:(response:any)=>{
+        this.payees=response;
+      },
+       error: (error: any) => {
+          console.error('Failed ', error);
+        
+        }
+    })
+  }
+  ongetschedule()
+  {
+      this.dataUploadService.getscheduledropdown(this.selectedPayeeId).subscribe({
+      next:(response:any)=>{
+        this.schedules=response;
+      },
+       error: (error: any) => {
+          console.error('Failed ', error);
+        
+        }
+    })
+  }
+
+  ongetpricelist()
+  {
+    this.dataUploadService.getpricelistdropdown(this.selectedScheduleId).subscribe({
+      next:(response:any)=>{
+        this.priceLists=response;
+      },
+       error: (error: any) => {
+          console.error('Failed ', error);
+        
+        }
+    })
+  }
+
+  ongetEntitlementset(){
+    this.dataUploadService.getentitlementsetdropdown(this.selectedPriceListId).subscribe({
+      next:(response:any)=>{
+        this.entitlementSets=response;
+      },
+       error: (error: any) => {
+          console.error('Failed ', error);
+        
+        }
+    })
+  }
    onGenerateBudget() {
     if (this.selectedIndex === null) {
       alert('Please select a table.');
@@ -183,7 +409,7 @@ resetRetention(index:number)
     const selectedTable = this.tablesData[this.selectedIndex].table;
     
     console.log(selectedTable);
-    this.dataUploadService.budgetdata(selectedTable,this.Overhead,this.Retention).subscribe({
+    this.dataUploadService.budgetdata(selectedTable,this.Overhead,this.Retention,this.selectedEntitlementSetId).subscribe({
         next: (response: any) => {
           console.log('generated budget data:', response);
           for(let i=0;i< response.updated_table.length;i++){

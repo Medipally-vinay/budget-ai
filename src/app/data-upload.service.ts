@@ -9,6 +9,30 @@ export class DataUploadService {
   private baseUrl=environment.apiUrl;
 
   constructor(private http:HttpClient) { }
+
+  getstudydropdown():Observable<any>{
+     return this.http.get<any>(`${this.baseUrl}/study`);
+  }
+  getsitedropdown(study:string):Observable<any>
+  {
+    return this.http.get<any>(`${this.baseUrl}/site/${study}`);
+  }
+  getpayeedropdown(site:string):Observable<any>
+  {
+    return this.http.get<any>(`${this.baseUrl}/payee/${site}`);
+  }
+   getscheduledropdown(payee:string):Observable<any>
+  {
+    return this.http.get<any>(`${this.baseUrl}/schedule/${payee}`);
+  }
+    getpricelistdropdown(schedule:string):Observable<any>
+  {
+    return this.http.get<any>(`${this.baseUrl}/pricelist/${schedule}`);
+  }
+     getentitlementsetdropdown(pricelist:string):Observable<any>
+  {
+    return this.http.get<any>(`${this.baseUrl}/entitlementset/${pricelist}`);
+  }
   uploadData(file: File, pageNumber: string, version: string):Observable<any>{
     const formData=new FormData();
     formData.append('file',file);
@@ -17,7 +41,7 @@ export class DataUploadService {
 
     return this.http.post<any>(`${this.baseUrl}/ask`, formData);
   }
-  budgetdata(tabledata:any,overhead:string,retention:string)
+  budgetdata(tabledata:any,overhead:string,retention:string,entitlementSetId:string)
   {
 
     const body:any = {}
@@ -26,7 +50,7 @@ export class DataUploadService {
     
     body["overhead_percentage"] = overhead
     body["table_data"] = tabledata
-    return this.http.post<any>(`${this.baseUrl}/calculate`,body);
+    return this.http.post<any>(`${this.baseUrl}/avisits${entitlementSetId}`,body);
   }
   audit(data:string,rating:string,percentage:string,studyId:any,comments:string,auditId:number)
   {
