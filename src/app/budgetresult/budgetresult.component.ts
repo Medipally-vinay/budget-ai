@@ -23,6 +23,62 @@ export class BudgetresultComponent {
   Entitlement:string="";
   data:any[]=[ 
       ]
+//       data:any[]=[
+//   {
+//     "baiExtractedVisitName": "VD1",
+//     "apecsVisitName": "V01",
+//     "entitlementName": "001 - V01",
+//     "Confidence": "99%",
+//     "Final Visit Rate": "2,972.00",
+//     "Retention": "0%",
+//     "Visit Cost": "2972.00",
+//     "Oldvalue":"1432",
+//     "overhead": "0.00"
+//   },
+//   {
+//     "baiExtractedVisitName": "TC1",
+//     "apecsVisitName": "TC1",
+//     "entitlementName": "001.2 - TC1",
+//     "Confidence": "99%",
+//     "Final Visit Rate": "3,154.00",
+//     "Retention": "0%",
+//      "Oldvalue":"1432",
+//     "Visit Cost": "3154.00",
+//     "overhead": "0.00"
+//   },
+//   {
+//     "baiExtractedVisitName": "FD2",
+//     "apecsVisitName": "F02",
+//     "entitlementName": "002 - F02",
+//     "Confidence": "98%",
+//     "Final Visit Rate": "3,850.00",
+//     "Retention": "1%",
+//     "Visit Cost": "3850.00",
+//     "overhead": "0.00"
+//   },
+//   {
+//     "baiExtractedVisitName": "SD3",
+//     "apecsVisitName": "S03",
+//     "entitlementName": "003 - S03",
+//     "Confidence": "97%",
+//     "Final Visit Rate": "4,200.00",
+//     "Retention": "2%",
+//     "Visit Cost": "4200.00",
+//     "overhead": "0.00"
+//   },
+//   {
+//     "baiExtractedVisitName": "MD4",
+//     "apecsVisitName": "M04",
+//     "entitlementName": "004 - M04",
+//     "Confidence": "99%",
+//     "Final Visit Rate": "2,500.00",
+//     "Retention": "0%",
+//      "Oldvalue":"1432",
+//     "Visit Cost": "2500.00",
+//     "overhead": "0.00"
+//   }
+// ]
+
 
 //       data: any[] = [
 //   {
@@ -89,6 +145,11 @@ ngOnInit(){
   })
 
 }
+
+resetRetention(index:number)
+{
+  this.data[index]["Final Visit Rate"]=this.data[index].Oldvalue;
+}
   // Function to remove currency symbols and parse number
   parseCost(costStr: string): number {
     return parseFloat(costStr.replace(/[€,]/g, '').replace(/\s/g, ''));
@@ -118,10 +179,7 @@ ngOnInit(){
       alert('Please select a table.');
       return;
     }
-    // if (!this.payeePricelistField?.value) {
-    //   alert('Please select a Payee Pricelist.');
-    //   return;
-    // }
+    
     const selectedTable = this.tablesData[this.selectedIndex].table;
     
     console.log(selectedTable);
@@ -143,7 +201,7 @@ ngOnInit(){
           alert('Failed to genereate budget data');
         }
       });
-    // this.generateBudgetTableData(selectedTable);
+   
   }
   onok(){
     this.dataUploadService.audit(

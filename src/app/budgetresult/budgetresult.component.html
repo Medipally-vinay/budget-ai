@@ -21,6 +21,7 @@
     >
       {{ item.description }} - {{ item.overall_confidence }} Confidence Level
     </span>
+    <span><img src="/assets/i-bar.svg" title="item.Reason"></span>
 
     <table *ngIf="selectedIndex === idx" class="styled-budget-table">
       <thead>
@@ -194,16 +195,17 @@
     <th>Entitlement Name</th>
      <th style="min-width: 20px;">Rate</th>
     <th >Overhead Value</th>
-   
+   <!-- <th>Old value</th> -->
     <th >Final rate</th>	
-    <th>Retention %</th></tr>
+    <th>Retention %</th>
+  <!-- <th class="fourth-col">actions</th></tr> -->
             </thead>
             <tbody>
   <tr *ngFor="let row of data; let rowIndex = index">
     <td>{{rowIndex + 1}}</td>
     <td (click)="editCell(rowIndex, 'VISIT NAME')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT NAME'); else visitNameInput">
-        {{ row["VISIT NAME"] }}
+        {{ row.apecsVisitName }}
       </ng-container>
       <ng-template #visitNameInput>
         <input [(ngModel)]="row['VISIT NAME']"
@@ -217,7 +219,7 @@
 
     <td (click)="editCell(rowIndex, 'index')">
       <ng-container *ngIf="!isEditing(rowIndex, 'index'); else indexInput">
-        {{ row.index }} - {{ row["VISIT NAME"] }}
+        {{ row.entitlementName }}
       </ng-container>
       <ng-template #indexInput>
         <input [(ngModel)]="row.index"
@@ -231,7 +233,7 @@
 
     <td style="text-align: right;" (click)="editCell(rowIndex, 'VISIT COST')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT COST'); else costInput">
-        {{ row["VISIT COST"] }}
+        {{ row["Visit Cost"] }}
       </ng-container>
       <ng-template #costInput>
         <input [(ngModel)]="row['VISIT COST']"
@@ -256,6 +258,9 @@
     height: auto;" />
       </ng-template>
     </td>
+    <!-- <td>
+      {{row.Oldvalue}}
+    </td> -->
 
     <td style="text-align: right;" (click)="editCell(rowIndex, 'Final Visit Rate')">
       <ng-container *ngIf="!isEditing(rowIndex, 'Final Visit Rate'); else finalRateInput">
@@ -284,6 +289,15 @@
     height: auto;" />
       </ng-template>
     </td>
+    <!-- <td class="fourth-col">
+      
+      <div *ngIf="row.Oldvalue">
+          <img src="/assets/tick.svg" style="width: 18px; height: 18px;" alt="">
+      <img src="/assets/cross.svg"  style="width: 18px; height: 18px;" (click)="resetRetention(rowIndex)">
+      </div>
+     
+    </td> -->
+     
   </tr>
 </tbody>
 

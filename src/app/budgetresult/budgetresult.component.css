@@ -1,5 +1,6 @@
 .component{
     display: flex;
+    width: max-content;
     flex-direction: row;
     /* margin:2%; */
     background-color: white;
@@ -658,3 +659,15 @@ textarea {
     margin-left: 4px;
 }
  
+
+
+
+ td.fourth-col {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+td.fourth-col:hover {
+  opacity: 1;
+} 
+
