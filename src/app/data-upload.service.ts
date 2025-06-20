@@ -1,4 +1,4 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,27 +11,28 @@ export class DataUploadService {
   constructor(private http:HttpClient) { }
 
   getstudydropdown():Observable<any>{
-     return this.http.get<any>(`${this.baseUrl}/study`);
+     return this.http.get<any>(`${this.baseUrl}/api/study`);
   }
-  getsitedropdown(study:string):Observable<any>
-  {
-    return this.http.get<any>(`${this.baseUrl}/site/${study}`);
-  }
+  getSiteDropdown(study: string): Observable<any> {
+  const params = new HttpParams().set('studyId', study);
+  return this.http.get<any>(`${this.baseUrl}/api/site`, { params });
+}
+
   getpayeedropdown(site:string):Observable<any>
-  {
-    return this.http.get<any>(`${this.baseUrl}/payee/${site}`);
+  { const params=new HttpParams().set('siteId',site);
+    return this.http.get<any>(`${this.baseUrl}/api/payee/`,{params});
   }
    getscheduledropdown(payee:string):Observable<any>
   {
-    return this.http.get<any>(`${this.baseUrl}/schedule/${payee}`);
+    return this.http.get<any>(`${this.baseUrl}/api/schedule/${payee}`);
   }
     getpricelistdropdown(schedule:string):Observable<any>
   {
-    return this.http.get<any>(`${this.baseUrl}/pricelist/${schedule}`);
+    return this.http.get<any>(`${this.baseUrl}/api/pricelist/${schedule}`);
   }
      getentitlementsetdropdown(pricelist:string):Observable<any>
   {
-    return this.http.get<any>(`${this.baseUrl}/entitlementset/${pricelist}`);
+    return this.http.get<any>(`${this.baseUrl}/api/entitlementset/${pricelist}`);
   }
   uploadData(file: File, pageNumber: string, version: string):Observable<any>{
     const formData=new FormData();
