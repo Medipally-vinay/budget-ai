@@ -17,67 +17,77 @@ export class BudgetresultComponent {
   constructor(private dataUploadService:DataUploadService,private sharedService:SharedService){
 
   }
+  accepts:any='true';
   Retention:any='';
   Overhead:any="";
   Overheadval:number=0;
   Entitlement:string="";
-  data:any[]=[ 
-      ]
-//       data:any[]=[
-//   {
-//     "baiExtractedVisitName": "VD1",
-//     "apecsVisitName": "V01",
-//     "entitlementName": "001 - V01",
-//     "Confidence": "99%",
-//     "Final Visit Rate": "2,972.00",
-//     "Retention": "0%",
-//     "Visit Cost": "2972.00",
-//     "Oldvalue":"1432",
-//     "overhead": "0.00"
-//   },
-//   {
-//     "baiExtractedVisitName": "TC1",
-//     "apecsVisitName": "TC1",
-//     "entitlementName": "001.2 - TC1",
-//     "Confidence": "99%",
-//     "Final Visit Rate": "3,154.00",
-//     "Retention": "0%",
-//      "Oldvalue":"1432",
-//     "Visit Cost": "3154.00",
-//     "overhead": "0.00"
-//   },
-//   {
-//     "baiExtractedVisitName": "FD2",
-//     "apecsVisitName": "F02",
-//     "entitlementName": "002 - F02",
-//     "Confidence": "98%",
-//     "Final Visit Rate": "3,850.00",
-//     "Retention": "1%",
-//     "Visit Cost": "3850.00",
-//     "overhead": "0.00"
-//   },
-//   {
-//     "baiExtractedVisitName": "SD3",
-//     "apecsVisitName": "S03",
-//     "entitlementName": "003 - S03",
-//     "Confidence": "97%",
-//     "Final Visit Rate": "4,200.00",
-//     "Retention": "2%",
-//     "Visit Cost": "4200.00",
-//     "overhead": "0.00"
-//   },
-//   {
-//     "baiExtractedVisitName": "MD4",
-//     "apecsVisitName": "M04",
-//     "entitlementName": "004 - M04",
-//     "Confidence": "99%",
-//     "Final Visit Rate": "2,500.00",
-//     "Retention": "0%",
-//      "Oldvalue":"1432",
-//     "Visit Cost": "2500.00",
-//     "overhead": "0.00"
-//   }
-// ]
+  // data:any[]=[  ]
+      data:any[]=[
+  {
+    "baiExtractedVisitName": "VD1",
+    "apecsVisitName": "V01",
+    "entitlementName": "001 - V01",
+    "Confidence": "99%",
+    "Final Visit Rate": "2,972.00",
+    "Retention": "0%",
+    "Visit Cost": "2972.00",
+    "Oldvalue":"1432",
+    "overhead": "0.00",
+    "accepts":true,
+    "final":true
+  },
+  {
+    "baiExtractedVisitName": "TC1",
+    "apecsVisitName": "TC1",
+    "entitlementName": "001.2 - TC1",
+    "Confidence": "99%",
+    "Final Visit Rate": "3,154.00",
+    "Retention": "0%",
+     "Oldvalue":"1432",
+    "Visit Cost": "3154.00",
+    "overhead": "0.00",
+    "accepts":true,
+    "final":true
+  },
+  {
+    "baiExtractedVisitName": "FD2",
+    "apecsVisitName": "F02",
+    "entitlementName": "002 - F02",
+    "Confidence": "98%",
+    "Final Visit Rate": "3,850.00",
+    "Retention": "1%",
+    "Visit Cost": "3850.00",
+    "overhead": "0.00",
+    "accepts":true,
+    "final":true
+  },
+  {
+    "baiExtractedVisitName": "SD3",
+    "apecsVisitName": "S03",
+    "entitlementName": "003 - S03",
+    "Confidence": "97%",
+    "Final Visit Rate": "4,200.00",
+    "Retention": "2%",
+    "Visit Cost": "4200.00",
+    "overhead": "0.00",
+    "accepts":true,
+    "final":true
+  },
+  {
+    "baiExtractedVisitName": "MD4",
+    "apecsVisitName": "M04",
+    "entitlementName": "004 - M04",
+    "Confidence": "99%",
+    "Final Visit Rate": "2,500.00",
+    "Retention": "0%",
+     "Oldvalue":"1432",
+    "Visit Cost": "2500.00",
+    "overhead": "0.00",
+    "accepts":true,
+    "final":true
+  }
+]
 
 
 //       data: any[] = [
@@ -148,7 +158,22 @@ ngOnInit(){
 
 resetRetention(index:number)
 {
-  this.data[index]["Final Visit Rate"]=this.data[index].Oldvalue;
+  this.data[index].final=!this.data[index].final;
+  this.data[index].accepts =!this.data[index].accepts;
+  // this.undo(index);
+}
+tick(index:number)
+{
+  this.data[index].final=true;
+  this.undo(index);
+}
+undo(index:number)
+{
+  // this.data[index].accepts =false;
+   this.data[index].accepts =!this.data[index].accepts;
+   this.data[index].final=!this.data[index].final;
+  //  this.data[index].final=!this.data[index].final;
+  
 }
   // Function to remove currency symbols and parse number
   parseCost(costStr: string): number {
@@ -296,4 +321,13 @@ stopEditing() {
   openModel(){
     this.showFeedbackModal=true;
   }
+  
+  accept(){
+     
+     this.data.forEach(item => item.accepts = false);
+  }
+  // undo()
+  // {
+  //   this.accepts=true;
+  // }
 }

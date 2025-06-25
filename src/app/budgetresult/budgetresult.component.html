@@ -195,10 +195,10 @@
     <th>Entitlement Name</th>
      <th style="min-width: 20px;">Rate</th>
     <th >Overhead Value</th>
-   <!-- <th>Old value</th> -->
+   <th style="min-width: 44px">Old value</th>
     <th >Final rate</th>	
     <th>Retention %</th>
-  <!-- <th class="fourth-col">actions</th></tr> -->
+  <th class="fourth-col" >Actions</th></tr>
             </thead>
             <tbody>
   <tr *ngFor="let row of data; let rowIndex = index">
@@ -258,14 +258,17 @@
     height: auto;" />
       </ng-template>
     </td>
-    <!-- <td>
+    <td [ngStyle]="{ 'background-color': row.final ? '' : '#20dc20' }">
       {{row.Oldvalue}}
-    </td> -->
+    </td>
 
-    <td style="text-align: right;" (click)="editCell(rowIndex, 'Final Visit Rate')">
-      <ng-container *ngIf="!isEditing(rowIndex, 'Final Visit Rate'); else finalRateInput">
+    <td style="text-align: right;" [ngStyle]="{ 'background-color': row.final ? '#20dc20' : '' }">
+      <ng-container >
         {{ row["Final Visit Rate"] }}
       </ng-container>
+      <!-- <ng-container *ngIf=" row.final === false  ">
+       {{row.Oldvalue}}
+      </ng-container> -->
       <ng-template #finalRateInput>
         <input [(ngModel)]="row['Final Visit Rate']"
                (blur)="stopEditing()"
@@ -289,14 +292,17 @@
     height: auto;" />
       </ng-template>
     </td>
-    <!-- <td class="fourth-col">
+    <td class="fourth-col" style="  text-align: center;">
       
-      <div *ngIf="row.Oldvalue">
-          <img src="/assets/tick.svg" style="width: 18px; height: 18px;" alt="">
-      <img src="/assets/cross.svg"  style="width: 18px; height: 18px;" (click)="resetRetention(rowIndex)">
+      <div *ngIf="row.Oldvalue && row.accepts === true">
+          <!-- <img src="/assets/tick.svg" style="width: 25px; height: 25px;" alt=""  (click)="tick(rowIndex)"> -->
+          <img src="/assets/cross.svg"  style="width: 25px; height: 25px;" (click)="resetRetention(rowIndex)">
+      </div>
+      <div *ngIf="row.Oldvalue && row.accepts === false">
+        <img src="/assets/undo.svg"  style="width: 25px; height: 25px;" alt="undo" (click)="undo(rowIndex)">
       </div>
      
-    </td> -->
+    </td>
      
   </tr>
 </tbody>
@@ -304,6 +310,7 @@
           </table>
          </div>
         <div class="btn-container">
+          <button class="accept-all" (click)="accept()">Accept All</button>
                   <button id="generateSubmitButton" (click)="openModel()" >Save To APECS</button>
                
               

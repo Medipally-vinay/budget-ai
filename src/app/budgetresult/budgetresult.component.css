@@ -260,7 +260,15 @@
   justify-content: flex-end;
 }
 
-
+.accept-all
+{
+  margin-top: 10px;
+        font-family: Arial, sans-serif;
+        background-color: #d6dfe6;
+        color: #00867d;
+        border: 3px solid #00867d;
+        width: 120px;
+}
  
       #generateBudgetButton{
         margin-top: 10px;
@@ -665,9 +673,13 @@ textarea {
  td.fourth-col {
   opacity: 0;
   transition: opacity 0.3s ease;
+  /* align-items: center;
+  justify-content: center; */
+  text-align: center;
 }
 
 td.fourth-col:hover {
   opacity: 1;
+  text-align: center;
 } 
 
