@@ -1,6 +1,6 @@
 .component{
     display: flex;
-    width: max-content;
+    /* width: max-content; */
     flex-direction: row;
     /* margin:2%; */
     background-color: white;

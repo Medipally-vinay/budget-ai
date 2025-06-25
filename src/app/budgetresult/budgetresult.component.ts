@@ -131,9 +131,11 @@ export class BudgetresultComponent {
   studynum:any='';
   selectedIndex: number | null = null;
   audit:any=0;
+  response:any=0;
 ngOnInit(){
   this.sharedService.data$.subscribe(value=>{
     this.audit=value.find((obj: any)=>Object.keys(obj).length==1 && obj.hasOwnProperty("id"))
+    this.response=value.find((obj: any)=>Object.keys(obj).length==1 && obj.hasOwnProperty("id"))
 
     this.tablesData=value;
     console.log(this.tablesData);

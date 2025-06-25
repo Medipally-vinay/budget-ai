@@ -6,7 +6,8 @@
 
   <div class="table-choices-list" style="min-width: 428px;">
   <div><h3>Budget Extract From Contract</h3></div>
-  <div *ngFor="let item of tablesData.slice(0, tablesData.length - 1); index as idx" class="table-choice">
+  <div><span>Time Duration:{{response}}</span></div>
+  <div *ngFor="let item of tablesData.slice(0, tablesData.length - 2); index as idx" class="table-choice">
     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
     <span 
       (click)="onTableToggle(idx,+item.Overhead)" 
@@ -21,8 +22,8 @@
     >
       {{ item.description }} - {{ item.overall_confidence }} Confidence Level
     </span>
-    <span><img src="/assets/i-bar.svg" title="item.Reason"></span>
-
+    <span style="margin-bottom: 5px;"><img src="/assets/i-bar.svg" [title]="item.Reason"></span>
+    
     <table *ngIf="selectedIndex === idx" class="styled-budget-table">
       <thead>
         <tr>
@@ -61,7 +62,7 @@
                       <label for="studyField">Study</label>
                       <div class="span-div">
                         <!-- <span id="studyValue">9999/2757</span> -->
-                        <select id="studyValue" name="studyValue"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
+                        <select id="studyValue" name="studyValue"  style="width: 100%; font-size: 13px; padding:5px; border: 0px;">
                           <option value="" disabled selected><span>Select a Study value</span></option>
                           <option value="0050/0112" ><span>0050/0112</span></option>
                            <option value="0050/0114" ><span>0050/0114</span></option>
@@ -75,7 +76,7 @@
                       <label for="siteField">Site</label>
                       <div class="span-div">
                       
-                         <select id="siteValue" name="siteValue"  style="width: 100%; font-size: 14px; padding:5px ;border: 0px;">
+                         <select id="siteValue" name="siteValue"  style="width: 100%; font-size: 13px; padding:5px ;border: 0px;">
                           <option value="" disabled selected><span>Select a Site</span></option>
                           <option value="9009" ><span>9009</span></option>
                            <option value="4007" ><span>4007</span></option>
@@ -89,7 +90,7 @@
                       <label for="payeeField">Payee</label>
                       <div class="span-div">
                      
-                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px;border: 0px; ">
+                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 13px; padding:5px;border: 0px; ">
                           <option value="" disabled selected><span>Select a Payee Name</span></option>
                            <option value="Clinical" ><span>Clinical Research Center of Nevada</span></option>
                            <option value="Bluegrass" ><span>Bluegrass Clinical Research</span></option>
@@ -103,7 +104,7 @@
                       <label for="schedules">Schedules</label>
                       <div class="span-div">
                         
-                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
+                         <select id="schedules" name="schedules"  style="width: 100%; font-size: 13px; padding:5px; border: 0px;">
                           <option value="" disabled selected><span>Select a Schedule</span></option>
                            <option value="Arm 1 + PK Sampling" ><span>Arm 1 + PK Sampling</span></option>
                            <option value="Arm 2 (Gemcitabine)" ><span>Arm 2 (Gemcitabine)</span></option>
@@ -117,7 +118,7 @@
                   <div class="form-item">
                       <label for="payeePricelistField">Payee Pricelist</label>
                       <div class="span-div">
-                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 14px; padding:5px ; border: 0px;">
+                        <select id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 13px; padding:5px ; border: 0px;">
                           <option value="" disabled selected><span>Select a Payee Pricelist</span></option>
                            <option value="230" ><span>230</span></option>
                            <option value="232" ><span>232</span></option>
@@ -131,8 +132,8 @@
                       <label for="entitlement">Entitlement Sets</label>
                       <div class="span-div">
                        
-                        <select id="entitlement" name="entitlement"  style="width: 100%; font-size: 14px; padding:5px ; border: 0px;">
-                              <option value="" disabled selected><span>Select an Entitlement</span></option>
+                        <select id="entitlement" name="entitlement"  style="width: 100%; font-size: 13px; padding:5px ; border: 0px;">
+                              <option value="" disabled selected ><span>Select an Entitlement</span></option>
                           <option value="12303" ><span>12303</span></option>
                            <option value="12304" ><span>12304</span></option>
                            <option value="12305"><span>12305</span></option>
@@ -205,7 +206,7 @@
     <td>{{rowIndex + 1}}</td>
     <td (click)="editCell(rowIndex, 'VISIT NAME')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT NAME'); else visitNameInput">
-        {{ row.apecsVisitName }}
+        {{ row["VISIT NAME"] }}
       </ng-container>
       <ng-template #visitNameInput>
         <input [(ngModel)]="row['VISIT NAME']"
@@ -219,7 +220,7 @@
 
     <td (click)="editCell(rowIndex, 'index')">
       <ng-container *ngIf="!isEditing(rowIndex, 'index'); else indexInput">
-        {{ row.entitlementName }}
+       {{rowIndex}} - {{ row["VISIT NAME"] }}
       </ng-container>
       <ng-template #indexInput>
         <input [(ngModel)]="row.index"
@@ -233,7 +234,7 @@
 
     <td style="text-align: right;" (click)="editCell(rowIndex, 'VISIT COST')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT COST'); else costInput">
-        {{ row["Visit Cost"] }}
+        {{ row["VISIT COST"] }}
       </ng-container>
       <ng-template #costInput>
         <input [(ngModel)]="row['VISIT COST']"
