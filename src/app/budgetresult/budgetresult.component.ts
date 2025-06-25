@@ -464,13 +464,13 @@ isEditing(rowIndex: number, column: string): boolean {
 stopEditing() {
   this.editingCell = null;
 }
-  generateBudgetTableData(table: any[]) {
+generateBudgetTableData(table: any[]) {
     // Implement this function or emit an event to parent
     console.log('Generating budget for:', table);
-   }
+}
 
 
-   showFeedbackModal = false;      // Set to true to show modal by default
+  showFeedbackModal = false;      // Set to true to show modal by default
   showThankYouModal = false;
 
   // Star rating logic

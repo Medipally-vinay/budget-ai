@@ -13,7 +13,7 @@ export class DataUploadService {
   getstudydropdown():Observable<any>{
      return this.http.get<any>(`${this.baseUrl}/api/study`);
   }
-  getSiteDropdown(study: string): Observable<any> {
+  getsitedropdown(study: string): Observable<any> {
   const params = new HttpParams().set('studyId', study);
   return this.http.get<any>(`${this.baseUrl}/api/site`, { params });
 }
