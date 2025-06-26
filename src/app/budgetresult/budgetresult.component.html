@@ -6,7 +6,7 @@
 
   <div class="table-choices-list" style="min-width: 428px;">
   <div><h3>Budget Extract From Contract</h3></div>
-  <div><span>Time Duration:{{response}}</span></div>
+  <div style="margin-top: 10px;"><span>Extracted Time :{{response}}</span></div>
   <div *ngFor="let item of tablesData.slice(0, tablesData.length - 2); index as idx" class="table-choice">
     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
     <span 
