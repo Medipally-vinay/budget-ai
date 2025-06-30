@@ -35,8 +35,8 @@
       <tbody>
         <ng-container *ngFor="let visit of item.table">
           <tr>
-            <td>{{ visit['VISIT NAME'] }}</td>
-            <td style="text-align: right;">{{ visit['VISIT COST'] }}</td>
+            <td>{{ visit.VISIT_NAME }}</td>
+            <td style="text-align: right;">{{ visit.VISIT_COST }}</td>
             <td style="text-align: right;">{{ visit.CONFIDENCE }}</td>
           </tr>
         </ng-container>
