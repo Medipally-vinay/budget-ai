@@ -340,6 +340,12 @@ resetRetention(index:number)
   }
   ongetsite()
   {
+    this.selectedSiteId="";
+    this.selectedPayeeId="";
+    this.selectedScheduleId="";
+    this.selectedPriceListId="";
+    this.selectedEntitlementSetId="";
+
     this.dataUploadService.getsitedropdown(this.selectedStudyId).subscribe({
       next:(response:any)=>{
         this.sites=response;
@@ -352,7 +358,10 @@ resetRetention(index:number)
   }
 
   ongetpayee()
-  {
+  {   this.selectedPayeeId="";
+    this.selectedScheduleId="";
+    this.selectedPriceListId="";
+    this.selectedEntitlementSetId="";
      this.dataUploadService.getpayeedropdown(this.selectedSiteId).subscribe({
       next:(response:any)=>{
         this.payees=response;
@@ -364,7 +373,9 @@ resetRetention(index:number)
     })
   }
   ongetschedule()
-  {
+  {     this.selectedScheduleId="";
+    this.selectedPriceListId="";
+    this.selectedEntitlementSetId="";
       this.dataUploadService.getscheduledropdown(this.selectedPayeeId).subscribe({
       next:(response:any)=>{
         this.schedules=response;
@@ -377,7 +388,8 @@ resetRetention(index:number)
   }
 
   ongetpricelist()
-  {
+  {this.selectedPriceListId="";
+    this.selectedEntitlementSetId="";
     this.dataUploadService.getpricelistdropdown(this.selectedScheduleId).subscribe({
       next:(response:any)=>{
         this.priceLists=response;
@@ -390,6 +402,7 @@ resetRetention(index:number)
   }
 
   ongetEntitlementset(){
+    this.selectedEntitlementSetId="";
     this.dataUploadService.getentitlementsetdropdown(this.selectedPriceListId).subscribe({
       next:(response:any)=>{
         this.entitlementSets=response;

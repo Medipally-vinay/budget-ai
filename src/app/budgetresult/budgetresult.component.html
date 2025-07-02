@@ -61,9 +61,9 @@
                       <label for="studyField">Study</label>
                       <div class="span-div">
                         <!-- <span id="studyValue">9999/2757</span> -->
-                        <select (onchange)="ongetsite()" [(ngModel)]="selectedStudyId" id="studyValue" name="studyValue"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
-                          <option value="" disabled selected><span>Select  Study</span></option>
-                           <option *ngFor="let study of studies" [value]="study.id">{{ study.Id }}</option>
+                        <select (change)="ongetsite()" [(ngModel)]="selectedStudyId" id="studyValue" name="studyValue"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
+                          <option value=""  selected><span>Select  Study</span></option>
+                           <option *ngFor="let study of studies" [value]="study.studyId">{{ study.studyId }}</option>
                         </select>
                         
                         
@@ -75,9 +75,9 @@
                       <label for="siteField">Site</label>
                       <div class="span-div">
                       
-                         <select  (onchange)="ongetpayee()" [(ngModel)]="selectedSiteId" [disabled]="!selectedStudyId" id="siteValue" name="siteValue"  style="width: 100%; font-size: 14px; padding:5px ;border: 0px;">
-                          <option value="" disabled selected><span>Select  Site</span></option>
-                          <option *ngFor="let site of sites" [value]="site.id">{{ site.id }}</option>
+                         <select  (change)="ongetpayee()" [(ngModel)]="selectedSiteId" [disabled]="!selectedStudyId" id="siteValue" name="siteValue"  style="width: 100%; font-size: 14px; padding:5px ;border: 0px;">
+                          <option value=""  selected><span>Select  Site</span></option>
+                          <option *ngFor="let site of sites" [value]="site.siteId">{{ site.siteId }}</option>
                         </select>
                       </div>
                   </div> 
@@ -85,9 +85,9 @@
                       <label for="payeeField">Payee</label>
                       <div class="span-div">
                      
-                         <select  (onchange)="ongetschedule()"  [(ngModel)]="selectedPayeeId" [disabled]="!selectedSiteId"id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px;border: 0px; ">
-                          <option value="" disabled selected><span>Select  Payee</span></option>
-                           <option *ngFor="let payee of payees" [value]="payee.id">{{ payee.id }}</option>
+                         <select  (change)="ongetschedule()"  [(ngModel)]="selectedPayeeId" [disabled]="!selectedSiteId" id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px;border: 0px; ">
+                          <option value=""  selected><span>Select  Payee</span></option>
+                           <option *ngFor="let payee of payees" [value]="payee.payeeId">{{ payee.payeeId }}</option>
                    
                         </select>
                       </div>
@@ -96,9 +96,9 @@
                       <label for="schedules">Schedules</label>
                       <div class="span-div">
                         
-                         <select (onchange)="ongetpricelist()" [(ngModel)]="selectedScheduleId" [disabled]="!selectedPayeeId" id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
-                          <option value="" disabled selected><span>Select a Schedule</span></option>
-                          <option *ngFor="let schedule of schedules" [value]="schedule.id">{{ schedule.id }}</option>
+                         <select (change)="ongetpricelist()" [(ngModel)]="selectedScheduleId" [disabled]="!selectedPayeeId" id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
+                          <option value=""  selected><span>Select a Schedule</span></option>
+                          <option *ngFor="let schedule of schedules" [value]="schedule.scheduleId">{{ schedule.scheduleId }}</option>
                    
                         </select>
                         
@@ -107,9 +107,9 @@
                   <div class="form-item">
                       <label for="payeePricelistField">Payee Pricelist</label>
                       <div class="span-div">
-                        <select (onchange)="ongetEntitlementset()" [(ngModel)]="selectedPriceListId"  [disabled]="!selectedScheduleId"  id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 14px; padding:5px ; border: 0px;">
-                          <option value="" disabled selected><span>Select Payee Pricelist</span></option>
-                          <option *ngFor="let price of priceLists" [value]="price.id">{{ price.id }}</option>
+                        <select (change)="ongetEntitlementset()" [(ngModel)]="selectedPriceListId"  [disabled]="!selectedScheduleId"  id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 14px; padding:5px ; border: 0px;">
+                          <option value=""  selected><span>Select Payee Pricelist</span></option>
+                          <option *ngFor="let price of priceLists" [value]="price.priceListId">{{ price.priceListId }}</option>
                         </select>
                       </div>
                   </div> 
@@ -118,8 +118,8 @@
                       <div class="span-div">
                        
                         <select [(ngModel)]="selectedEntitlementSetId"  [disabled]="!selectedPriceListId" id="entitlement" name="entitlement"  style="width: 100%; font-size: 14px; padding:5px ; border: 0px;">
-                       <option  value="" disabled selected><span>Select Entitlement</span></option>
-                         <option *ngFor="let ent of entitlementSets" [value]="ent.id">{{ ent.id }}</option>
+                       <option  value=""  selected><span>Select Entitlement</span></option>
+                         <option *ngFor="let ent of entitlementSets" [value]="ent.entitlementSetId">{{ ent.entitlementSetId }}</option>
                         </select>
                       </div>
                   </div>
