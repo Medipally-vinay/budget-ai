@@ -34,8 +34,8 @@
       <tbody>
         <ng-container *ngFor="let visit of item.table">
           <tr>
-            <td>{{ visit['VISIT NAME'] }}</td>
-            <td style="text-align: right;">{{ visit['VISIT COST'] }}</td>
+            <td>{{ visit.VISIT_NAME}}</td>
+            <td style="text-align: right;">{{ visit.VISIT_COST }}</td>
             <td style="text-align: right;">{{ visit.CONFIDENCE }}</td>
           </tr>
         </ng-container>
@@ -185,12 +185,12 @@
             <tbody>
   <tr *ngFor="let row of data; let rowIndex = index">
     <td>{{rowIndex + 1}}</td>
-    <td (click)="editCell(rowIndex, 'VISIT NAME')">
-      <ng-container *ngIf="!isEditing(rowIndex, 'VISIT NAME'); else visitNameInput">
+    <td (click)="editCell(rowIndex, 'apecsVisitName')">
+      <ng-container *ngIf="!isEditing(rowIndex, 'apecsVisitName'); else visitNameInput">
         {{ row.apecsVisitName }}
       </ng-container>
       <ng-template #visitNameInput>
-        <input [(ngModel)]="row['VISIT NAME']"
+        <input [(ngModel)]="row['apecsVisitName']"
                (blur)="stopEditing()"
                (keydown.enter)="stopEditing()"
                autofocus  style="min-width: 20px;
@@ -199,12 +199,12 @@
       </ng-template>
     </td>
 
-    <td (click)="editCell(rowIndex, 'index')">
-      <ng-container *ngIf="!isEditing(rowIndex, 'index'); else indexInput">
+    <td (click)="editCell(rowIndex, 'entitlementName')">
+      <ng-container *ngIf="!isEditing(rowIndex, 'entitlementName'); else indexInput">
         {{ row.entitlementName }}
       </ng-container>
       <ng-template #indexInput>
-        <input [(ngModel)]="row.index"
+        <input [(ngModel)]="row.entitlementName"
                (blur)="stopEditing()"
                (keydown.enter)="stopEditing()"
                autofocus  style="min-width: 20px;
