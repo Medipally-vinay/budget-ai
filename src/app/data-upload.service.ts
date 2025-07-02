@@ -7,32 +7,33 @@ import { Observable } from 'rxjs';
 })
 export class DataUploadService {
   private baseUrl=environment.apiUrl;
+  private baseUrl2='http://10.11.105.149:9091';
 
   constructor(private http:HttpClient) { }
 
   getstudydropdown():Observable<any>{
-     return this.http.get<any>(`${this.baseUrl}/api/study`);
+     return this.http.get<any>(`${this.baseUrl2}/api/study`);
   }
   getsitedropdown(study: string): Observable<any> {
   const params = new HttpParams().set('studyId', study);
-  return this.http.get<any>(`${this.baseUrl}/api/site`, { params });
+  return this.http.get<any>(`${this.baseUrl2}/api/site`, { params });
 }
 
   getpayeedropdown(site:string):Observable<any>
   { const params=new HttpParams().set('siteId',site);
-    return this.http.get<any>(`${this.baseUrl}/api/payee/`,{params});
+    return this.http.get<any>(`${this.baseUrl2}/api/payee/`,{params});
   }
    getscheduledropdown(payee:string):Observable<any>
   {
-    return this.http.get<any>(`${this.baseUrl}/api/schedule/${payee}`);
+    return this.http.get<any>(`${this.baseUrl2}/api/schedule/${payee}`);
   }
     getpricelistdropdown(schedule:string):Observable<any>
   {
-    return this.http.get<any>(`${this.baseUrl}/api/pricelist/${schedule}`);
+    return this.http.get<any>(`${this.baseUrl2}/api/pricelist/${schedule}`);
   }
      getentitlementsetdropdown(pricelist:string):Observable<any>
   {
-    return this.http.get<any>(`${this.baseUrl}/api/entitlementset/${pricelist}`);
+    return this.http.get<any>(`${this.baseUrl2}/api/entitlementset/${pricelist}`);
   }
   uploadData(file: File, pageNumber: string, version: string):Observable<any>{
     const formData=new FormData();
@@ -51,7 +52,7 @@ export class DataUploadService {
     
     body["overhead_percentage"] = overhead
     body["table_data"] = tabledata
-    return this.http.post<any>(`${this.baseUrl}/avisits${entitlementSetId}`,body);
+    return this.http.post<any>(`${this.baseUrl2}/avisits${entitlementSetId}`,body);
   }
   audit(data:string,rating:string,percentage:string,studyId:any,comments:string,auditId:number)
   {

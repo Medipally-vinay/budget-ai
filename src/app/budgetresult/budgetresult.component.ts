@@ -313,7 +313,7 @@ resetRetention(index:number)
     this.tablesData.forEach(item => {
       if (Array.isArray(item.table)) {
         const total = item.table.reduce((sum:number, row:any) => {
-          const cost = this.parseCost(row['VISIT COST']);
+          const cost = this.parseCost(row.VISIT_COST);
           return sum + (isNaN(cost) ? 0 : cost);
         }, 0);
         console.log("total sum",total);
