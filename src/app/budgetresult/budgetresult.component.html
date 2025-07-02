@@ -28,7 +28,7 @@
       <thead>
         <tr>
           <th>Visit</th>
-          <th >{{ +item.Overhead > 0 ? 'Rate (with OH - ' + item.Overhead + '%)' : 'Rate (without OH)' }} </th>
+          <th >{{item.Overhead && +item.Overhead.replace('%','') > 0 ? 'Rate (with OH - ' + item.Overhead + '%)' : 'Rate (without OH)' }} </th>
           <th >Confidence</th>
         </tr>
       </thead>
