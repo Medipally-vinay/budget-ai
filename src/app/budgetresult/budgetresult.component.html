@@ -77,7 +77,7 @@
                       
                          <select  (change)="ongetpayee()" [(ngModel)]="selectedSiteId" [disabled]="!selectedStudyId" id="siteValue" name="siteValue"  style="width: 100%; font-size: 14px; padding:5px ;border: 0px;">
                           <option value=""  selected><span>Select  Site</span></option>
-                          <option *ngFor="let site of sites" [value]="site.siteId">{{ site.siteId }}</option>
+                          <option *ngFor="let site of sites" [value]="site.siteId">{{ site.siteNum }}</option>
                         </select>
                       </div>
                   </div> 
@@ -87,7 +87,7 @@
                      
                          <select  (change)="ongetschedule()"  [(ngModel)]="selectedPayeeId" [disabled]="!selectedSiteId" id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px;border: 0px; ">
                           <option value=""  selected><span>Select  Payee</span></option>
-                           <option *ngFor="let payee of payees" [value]="payee.payeeId">{{ payee.payeeId }}</option>
+                           <option *ngFor="let payee of payees" [value]="payee.payeeId">{{ payee.payeeName }}</option>
                    
                         </select>
                       </div>
@@ -98,7 +98,7 @@
                         
                          <select (change)="ongetpricelist()" [(ngModel)]="selectedScheduleId" [disabled]="!selectedPayeeId" id="schedules" name="schedules"  style="width: 100%; font-size: 14px; padding:5px; border: 0px;">
                           <option value=""  selected><span>Select a Schedule</span></option>
-                          <option *ngFor="let schedule of schedules" [value]="schedule.scheduleName">{{ schedule.scheduleName }}</option>
+                          <option *ngFor="let schedule of schedules" [value]="schedule.scheduleId">{{ schedule.scheduleName }}</option>
                    
                         </select>
                         
@@ -109,7 +109,7 @@
                       <div class="span-div">
                         <select (change)="ongetEntitlementset()" [(ngModel)]="selectedPriceListId"  [disabled]="!selectedScheduleId"  id="payeePricelistField" name="payeePricelistField"  style="width: 100%; font-size: 14px; padding:5px ; border: 0px;">
                           <option value=""  selected><span>Select Payee Pricelist</span></option>
-                          <option *ngFor="let price of priceLists" [value]="price.priceListName">{{ price.priceListName }}</option>
+                          <option *ngFor="let price of priceLists" [value]="price.priceListId">{{ price.priceListName }}</option>
                         </select>
                       </div>
                   </div> 
