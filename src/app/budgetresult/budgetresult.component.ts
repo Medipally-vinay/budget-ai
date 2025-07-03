@@ -6,10 +6,11 @@ import { SharedService } from '../shared.service';
 import { DataUploadService } from '../data-upload.service';
 import { audit } from 'rxjs';
 import { response } from 'express';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 @Component({
   selector: 'app-budgetresult',
   standalone: true,
-  imports: [RouterModule,CommonModule,FormsModule],
+  imports: [RouterModule,CommonModule,FormsModule,NgxSkeletonLoaderModule],
   templateUrl: './budgetresult.component.html',
   styleUrl: './budgetresult.component.css'
 })
@@ -21,6 +22,10 @@ export class BudgetresultComponent {
   Overhead:any="";
   Overheadval:number=0;
   Entitlement:string="";
+   loading:boolean = false;
+
+  
+  skeletonRows:any = Array(5);
   // dropdown:any = [
   //   {
   //     studyId: 'study-001',
@@ -414,6 +419,7 @@ resetRetention(index:number)
     })
   }
    onGenerateBudget() {
+    this.loading=true;
     if (this.selectedIndex === null) {
       alert('Please select a table.');
       return;
@@ -424,20 +430,22 @@ resetRetention(index:number)
     console.log(selectedTable);
     this.dataUploadService.budgetdata(selectedTable,this.Overhead,this.Retention,this.selectedEntitlementSetId).subscribe({
         next: (response: any) => {
+          this.loading=false;
           console.log('generated budget data:', response);
-          for(let i=0;i< response.updated_table.length;i++){
-            response.updated_table[i]["cycle"] =Object.keys(response.updated_table[i])[0]
-            response.updated_table[i]["cycleValue"] =Object.values(response.updated_table[i])[0]
-            response.updated_table[i]["index"] =i
-          }
-           this.data=response.updated_table;
+          // for(let i=0;i< response.updated_table.length;i++){
+          //   response.updated_table[i]["cycle"] =Object.keys(response.updated_table[i])[0]
+          //   response.updated_table[i]["cycleValue"] =Object.values(response.updated_table[i])[0]
+          //   response.updated_table[i]["index"] =i
+          // }
+           this.data=response;
     
-
+          this.loading=false;
          
         },
         error: (error: any) => {
           console.error('Failed to genereate budget data', error);
           alert('Failed to genereate budget data');
+          this.loading=false;
         }
       });
    
