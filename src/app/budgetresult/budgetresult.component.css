@@ -24,16 +24,16 @@
   cursor: pointer;
 }
 .table-choices-list {
-  min-width: 428px;
+  /* min-width: 428px; */
   margin-right: 2%;
 }
 
 .table-choice {
-  margin-bottom: 30px;
+  margin-bottom:3%;
 }
 
 .table-choice input[type="radio"] {
-  margin-right: 10px;
+  margin-right: 2%;
 }
 
 /* Caret for expand/collapse */
@@ -588,7 +588,7 @@ textarea {
 }
  
 #generatedBudgetTable th, #outputTable th {
-  min-width: 96px;
+  /* min-width: 96px; */
     height: 30px;
     font-size: 14px;
   background-color: #00867d;

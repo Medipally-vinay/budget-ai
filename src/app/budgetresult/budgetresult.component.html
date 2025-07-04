@@ -4,9 +4,9 @@
     </div>
     
 
-  <div class="table-choices-list" style="min-width: 428px;">
+  <div class="table-choices-list" style="width:30%;">
   <div><h3>Budget Extract From Contract</h3></div>
-  <div style="margin-top: 10px;"><span>Extracted Time :{{response}}</span></div>
+  <div style="margin-top: 10px;"><span>Extracted Time : {{response}}</span></div>
   <div *ngFor="let item of tablesData.slice(0, tablesData.length - 2); index as idx" class="table-choice">
     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
     <span 
@@ -22,7 +22,7 @@
     >
       {{ item.description }} - {{ item.overall_confidence }} Confidence Level
     </span>
-    <span style="margin-bottom: 5px;"><img src="/assets/i-bar.svg" [title]="item.Reason"></span>
+    <span style="position: relative; top: 6px;"><img src="/assets/i-bar.svg" [title]="item.Reason"></span>
     
     <table *ngIf="selectedIndex === idx" class="styled-budget-table">
       <thead>
@@ -50,7 +50,7 @@
 </div>
 
     
-    <div class="table-wrapper" style="min-width: 325px;">
+    <div class="table-wrapper" style="width: 25%;">
               <div class="triple-container">
                 <div class="eye-container">
                   <img src="assets/eye.png" height="20px" width="40px"/>
@@ -148,7 +148,7 @@
               <div class="last-box">
                 <div class="input-container">
                   <div class="input-box">
-                    <label for="unscheduledVisits">Unscheduled Visits <span class="colon">:</span></label>
+                    <label for="unscheduledVisits">Unscheduled Visits<span class="colon">:</span></label>
                     <input type="number" id="unscheduledVisits"  />
                   </div>
                
@@ -184,7 +184,7 @@
               </div>
               </div>
             </div>
-     <div>
+     <div style="width:45%">
         <div><h3>Budget to be entered on APECS</h3></div>
          <div>
 
@@ -194,11 +194,11 @@
                 <th style="min-width: 20px;">S.No</th>
               <th>Visit Def Desc</th>
     <th>Entitlement Name</th>
-     <th style="min-width: 20px;">Rate</th>
-    <th >Overhead Value</th>
+     <th style="width: 11%;">Rate</th>
+    <th style="width: 12%;">OH Value</th>
    <!-- <th>Old value</th> -->
-    <th >Final rate</th>	
-    <th>Retention %</th>
+    <th style="width: 13%;">Final rate</th>	
+    <th style="width: 9%;">Ret %</th>
   <!-- <th class="fourth-col">actions</th></tr> -->
             </thead>
             <tbody>

@@ -21,8 +21,8 @@ export class BudgetresultComponent {
   Overhead:any="";
   Overheadval:number=0;
   Entitlement:string="";
-  data:any[]=[ 
-      ]
+  // data:any[]=[ 
+  //     ]
 //       data:any[]=[
 //   {
 //     "baiExtractedVisitName": "VD1",
@@ -80,50 +80,117 @@ export class BudgetresultComponent {
 // ]
 
 
-//       data: any[] = [
-//   {
-//     "Visit Def Desc": "Screening Visit",
-//     "Entitlement Name": "Consultation",
-//     "Rate": 1500,
-//     "Overhead Value": "10%",
-//     "Final Rate": 1650,
-//     "Retention %": "95%"
-//   },
-//   {
-//     "Visit Def Desc": "Baseline Visit",
-//     "Entitlement Name": "Blood Test",
-//     "Rate": 800,
-//     "Overhead Value": "8%",
-//     "Final Rate": 864,
-//     "Retention %": "90%"
-//   },
-//   {
-//     "Visit Def Desc": "Week 4 Follow-up",
-//     "Entitlement Name": "MRI Scan",
-//     "Rate": 2500,
-//     "Overhead Value": "12%",
-//     "Final Rate": 2800,
-//     "Retention %": "92%"
-//   },
-//   {
-//     "Visit Def Desc": "Week 8 Assessment",
-//     "Entitlement Name": "Physical Exam",
-//     "Rate": 1000,
-//     "Overhead Value": "7%",
-//     "Final Rate": 1070,
-//     "Retention %": "93%"
-//   },
-//   {
-//     "Visit Def Desc": "End of Study Visit",
-//     "Entitlement Name": "Final Review",
-//     "Rate": 1200,
-//     "Overhead Value": "9%",
-//     "Final Rate": 1308,
-//     "Retention %": "96%"
-//   }
-// ];
+     data: any[] = [
+  {
+    VISIT_NAME: 'Screening',
+    VISIT_COST: 500,
+    overhead: '10%',
+    'Final Visit Rate': 550,
+    Retention: '90%'
+  },
+  {
+    VISIT_NAME: 'Baseline Visit',
+    VISIT_COST: 750,
+    overhead: '5%',
+    'Final Visit Rate': 787.5,
+    Retention: '85%'
+  },
+  {
+    VISIT_NAME: 'Follow-up',
+    VISIT_COST: 900,
+    overhead: '0%',
+    'Final Visit Rate': 900,
+    Retention: '80%'
+  },
+  {
+    VISIT_NAME: 'Extended Follow-up Visit with Long Name to Test Wrapping in the Table Cell and Ensure It Does Not Overflow',
+    VISIT_COST: 1500,
+    overhead: '15%',
+    'Final Visit Rate': 1725,
+    Retention: '75%'
+  },
+  {
+    VISIT_NAME: 'Close-out Visit with Additional Data Collection Procedures and Patient Debriefing',
+    VISIT_COST: 1200,
+    overhead: '20%',
+    'Final Visit Rate': 1440,
+    Retention: '70%'
+  },
+  {
+    VISIT_NAME: 'Safety Assessment',
+    VISIT_COST: 650,
+    overhead: '8%',
+    'Final Visit Rate': 702,
+    Retention: '88%'
+  },
+  {
+    VISIT_NAME: 'Final Long Term Follow-up Visit with Extremely Verbose Description Just to Push the Cell Width and Force Text Wrapping in the Table for Testing Purposes',
+    VISIT_COST: 2000,
+    overhead: '25%',
+    'Final Visit Rate': 2500,
+    Retention: '65%'
+  }
+];
 
- tablesData: any[] = [];
+
+//  tablesData: any[] = [];
+tablesData: any[] = [
+  {
+    description: 'Initial Budget Proposal with Extended Justification and Context Details to Fill the Div',
+    overall_confidence: 'High',
+    Overhead: '25%',
+    Reason: 'This budget was extracted based on extensive historical datasets and includes multiple assumptions regarding patient retention and visit frequencies, which might affect the total cost estimation significantly.',
+    total_visit_cost: 45250,
+    table: [
+      {
+        VISIT_NAME: 'Screening Visit with Pre-screening Procedures and Additional Lab Panels Included',
+        VISIT_COST: 10500,
+        CONFIDENCE: 'High'
+      },
+      {
+        VISIT_NAME: 'Baseline Visit including Extended Informed Consent and Enrollment Documentation',
+        VISIT_COST: 14750,
+        CONFIDENCE: 'High'
+      },
+      {
+        VISIT_NAME: 'Follow-up Visit with Additional Safety Monitoring and Extended Data Capture Requirements',
+        VISIT_COST: 20000,
+        CONFIDENCE: 'Medium'
+      }
+    ]
+  },
+  {
+    description: 'Revised Budget Estimate with Protocol Amendments and Multiple Adjustment Factors',
+    overall_confidence: 'Medium',
+    Overhead: '15%',
+    Reason: 'This estimate incorporates recent protocol amendments that introduced additional safety assessments and longer observation periods, requiring more resources and impacting the overall budget allocation substantially.',
+    total_visit_cost: 39800,
+    table: [
+      {
+        VISIT_NAME: 'Screening Visit including Genetic Counseling Session and Extended Lab Analysis',
+        VISIT_COST: 8900,
+        CONFIDENCE: 'Medium'
+      },
+      {
+        VISIT_NAME: 'Baseline Visit with Pre-treatment Evaluations and Additional Imaging Requirements',
+        VISIT_COST: 14900,
+        CONFIDENCE: 'High'
+      },
+      {
+        VISIT_NAME: 'Follow-up Visit with Detailed Efficacy and Safety Assessments Conducted Over Multiple Days',
+        VISIT_COST: 16000,
+        CONFIDENCE: 'Low'
+      }
+    ]
+  },
+  {
+    dummy1: true
+  },
+  {
+    dummy2: true
+  }
+];
+
 
  selectedStudy!: string;
  selectedSite!: string;
