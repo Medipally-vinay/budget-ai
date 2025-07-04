@@ -269,7 +269,7 @@ ngOnInit(){
   this.sharedService.study$.subscribe(value=>{
     this.studynum=value;
   })
-  this.ongetstudy();
+  // this.ongetstudy();
 
 }
 
