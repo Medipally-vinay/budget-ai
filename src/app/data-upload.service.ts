@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataUploadService {
   private baseUrl=environment.apiUrl;
-  private baseUrl2='http://10.11.105.149:9091';
+  private baseUrl2='http://10.11.105.149:8080';
 
   constructor(private http:HttpClient) { }
 
