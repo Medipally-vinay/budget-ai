@@ -39,13 +39,13 @@ export class FormComponentComponent {
       return;
     }
     this.loadinData  =true;
-    // You can send this data to your backend API here, 
+    
     const formData = new FormData();
     formData.append('pdfFile', this.selectedFile);
     formData.append('pageNumbers', this.pageNumber);
     formData.append('version', this.version);
 
-    //For now, simulate extraction and navigate
+   
      this.dataUploadService.uploadData(this.selectedFile, this.pageNumber, this.version)
       .subscribe({
         next: (response: any) => {
@@ -64,7 +64,7 @@ export class FormComponentComponent {
       });
 
     // Navigate to result page
-    this.router.navigate(['/budgetresult']);
+    // this.router.navigate(['/budgetresult']);
   }
 }
 
