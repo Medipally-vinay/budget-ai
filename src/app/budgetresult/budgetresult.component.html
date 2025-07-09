@@ -22,7 +22,7 @@
     >
       {{ item.description }} - {{ item.overall_confidence }} Confidence Level
     </span>
-   <span style="position: relative; top: 6px;"><img src="/assets/i-bar.svg" [title]="item.Reason"></span>
+   <span style="position: relative; top: 6px;"><img src="assets/i-bar.svg" [title]="item.Reason"></span>
 
     <table *ngIf="selectedIndex === idx" class="styled-budget-table">
       <thead>
@@ -272,6 +272,12 @@
     </tr>
   </ng-template>
 </tbody>
+ <!-- <td style="font-weight: bold;">Total </td>
+  <td style="font-weight: bold;text-align: end;"></td>
+   <td style="font-weight: bold;text-align: end;"></td>
+      <td style="font-weight: bold;text-align: end;">{{totalVisitCost}}</td>
+       <td style="font-weight: bold;text-align: end;"></td>
+        <td style="font-weight: bold;text-align: end;">{{totalVisitCost}}</td> -->
 
 
           </table>

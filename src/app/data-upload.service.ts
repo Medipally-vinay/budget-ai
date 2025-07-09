@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class DataUploadService {
   private baseUrl=environment.apiUrl;
-  private baseUrl2='http://10.11.105.149:8080';
+  // private baseUrl2='http://10.11.105.149:8081';
+    private baseUrl2='http://10.11.105.149:8081/contractextraction';
+
 
   constructor(private http:HttpClient) { }
 
@@ -52,7 +54,7 @@ export class DataUploadService {
     
     body["overhead_percentage"] = overhead
     body["table_data"] = tabledata
-    return this.http.post<any>(`${this.baseUrl2}/api/avisits${entitlementSetId}`,body);
+    return this.http.post<any>(`${this.baseUrl2}/api/avisits/${entitlementSetId}`,body);
   }
   audit(data:string,rating:string,percentage:string,studyId:any,comments:string,auditId:number)
   {

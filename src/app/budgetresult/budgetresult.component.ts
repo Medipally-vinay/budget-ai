@@ -156,7 +156,7 @@ export class BudgetresultComponent {
 //     "Final Visit Rate": "3,154.00",
 //     "Retention": "0%",
 //      "Oldvalue":"1432",
-//     "Visit Cost": "3154.00",
+//     "Visit Cost": "3154.20",
 //     "overhead": "0.00"
 //   },
 //   {
@@ -164,7 +164,7 @@ export class BudgetresultComponent {
 //     "apecsVisitName": "F02",
 //     "entitlementName": "002 - F02",
 //     "Confidence": "98%",
-//     "Final Visit Rate": "3,850.00",
+//     "Final Visit Rate": "3,850.20",
 //     "Retention": "1%",
 //     "Visit Cost": "3850.00",
 //     "overhead": "0.00"
@@ -250,6 +250,57 @@ entitlementSets:any=[];
 
 
  tablesData: any[] = [];
+//  tablesData = [
+//   {
+//     description: 'Base Estimate',
+//     overall_confidence: 'High',
+//     Overhead: 15,
+//     Reason: 'This is the standard base estimate with applied overhead.',
+//     total_visit_cost: "2500",
+//     table: [
+//       { VISIT_NAME: 'Screening Visit', VISIT_COST: 500, CONFIDENCE: 'High' },
+//       { VISIT_NAME: 'Baseline Visit', VISIT_COST: 800, CONFIDENCE: 'Medium' },
+//       { VISIT_NAME: 'Follow-up Visit', VISIT_COST: 1200, CONFIDENCE: 'High' }
+//     ]
+//   },
+//   {
+//     description: 'Optimistic Estimate',
+//     overall_confidence: 'Medium',
+//     Overhead: 0,
+//     Reason: 'Optimistic scenario without overhead.',
+//     total_visit_cost: "2100",
+//     table: [
+//       { VISIT_NAME: 'Screening Visit', VISIT_COST: 400, CONFIDENCE: 'Medium' },
+//       { VISIT_NAME: 'Baseline Visit', VISIT_COST: 700, CONFIDENCE: 'Medium' },
+//       { VISIT_NAME: 'Follow-up Visit', VISIT_COST: 1000, CONFIDENCE: 'Medium' }
+//     ]
+//   },
+//   {
+//     description: 'Pessimistic Estimate',
+//     overall_confidence: 'Low',
+//     Overhead: 20,
+//     Reason: 'Includes higher overhead due to uncertainty.',
+//     total_visit_cost: "3000",
+//     table: [
+//       { VISIT_NAME: 'Screening Visit', VISIT_COST: 600, CONFIDENCE: 'Low' },
+//       { VISIT_NAME: 'Baseline Visit', VISIT_COST: 900, CONFIDENCE: 'Low' },
+//       { VISIT_NAME: 'Follow-up Visit', VISIT_COST: 1500, CONFIDENCE: 'Low' }
+//     ]
+//   },
+//   // This last item will be excluded by slice()
+//   {
+//     description: 'Draft Estimate',
+//     overall_confidence: 'N/A',
+//     Overhead: 10,
+//     Reason: 'Preliminary draft not finalized.',
+//     total_visit_cost: "1800",
+//     table: [
+//       { VISIT_NAME: 'Screening Visit', VISIT_COST: 300, CONFIDENCE: 'N/A' },
+//       { VISIT_NAME: 'Baseline Visit', VISIT_COST: 600, CONFIDENCE: 'N/A' },
+//       { VISIT_NAME: 'Follow-up Visit', VISIT_COST: 900, CONFIDENCE: 'N/A' }
+//     ]
+//   }
+// ];
 
  selectedStudy!: string;
  selectedSite!: string;
@@ -273,6 +324,7 @@ ngOnInit(){
     this.studynum=value;
   })
   // this.ongetstudy();
+  //  this.calculatevalues();
 
 }
 
@@ -329,6 +381,29 @@ resetRetention(index:number)
       }
     });
   }
+// totalVisitCost: number = 0;
+//   totalFinalCost: number = 0;
+//   calculatevalues(): void{
+//     this.totalVisitCost = 0;
+//     this.totalFinalCost = 0;
+
+    
+//     for (const item of this.data) {
+      
+//       const visitCost = parseFloat(
+//         (item["Visit Cost"] || "0").replace(/,/g, "")
+//       );
+
+      
+//       const finalRate = parseFloat(
+//         (item["Final Visit Rate"] || "0").replace(/,/g, "")
+//       );
+
+      
+//       this.totalVisitCost += visitCost;
+//       this.totalFinalCost += finalRate;
+//     }
+//   }
   onTableToggle(index: number,Overhead:number) {
     this.selectedIndex = this.selectedIndex === index ? null : index;
     this.Overheadval=this.Overhead;
@@ -441,7 +516,7 @@ resetRetention(index:number)
           //   response.updated_table[i]["index"] =i
           // }
            this.data=response;
-    
+          //  this.calculatevalues();]
           this.loading=false;
          
         },
