@@ -52,7 +52,7 @@ export class DataUploadService {
     
     body["overhead_percentage"] = overhead
     body["table_data"] = tabledata
-    return this.http.post<any>(`${this.baseUrl2}/avisits${entitlementSetId}`,body);
+    return this.http.post<any>(`${this.baseUrl2}/api/avisits${entitlementSetId}`,body);
   }
   audit(data:string,rating:string,percentage:string,studyId:any,comments:string,auditId:number)
   {
