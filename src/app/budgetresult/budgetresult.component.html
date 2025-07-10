@@ -131,20 +131,20 @@
               </div>
               <div class="last-box">
                 <div class="input-container">
-                  <div class="input-box">
+                  <!-- <div class="input-box">
                     <label for="unscheduledVisits">Unscheduled Visits <span class="colon">:</span></label>
                     <input type="number" id="unscheduledVisits"  />
-                  </div>
+                  </div> -->
                
-                  <div class="input-box">
+                  <!-- <div class="input-box">
                     <label for="cycles">Cycles <span class="colon">:</span></label>
                     <input type="number" id="cycles"  />
-                  </div>
-               
+                  </div> -->
+<!--                
                   <div class="input-box">
                     <label for="followup">Followup <span class="colon">:</span></label>
                     <input type="number" id="followup"  />
-                  </div>
+                  </div> -->
                   <div class="input-box">
                     <label for="Overhead">Overhead %<span class="colon">:</span></label>
                     <input type="number" id="Overhead"  [disabled]="Overheadval == 0 ? false: true"  [(ngModel)]="Overhead"/>
@@ -173,18 +173,98 @@
          <div>
 
           <table id="generatedBudgetTable" style="width: 100%;">
-            <thead>
+            <!-- <thead>
               <tr>
                 <th style="width: 8%;">S.No</th>
-              <th styles="width:22%">Visit Def Desc</th>
-    <th style="width: 25%;">Entitlement Name</th>
+              <th styles="width: 22%">Visit Def Desc <img src="assets/filter.svg" style="width: 20px"></th>
+    <th style="width: 26%;">Entitlement Name <img src="assets/filter.svg" style="width: 20px"></th>
      <th style="width: 11%;">Rate</th>
-    <th style="width: 12%;" >OH Value</th>
-   <!-- <th>Old value</th> -->
+    <th style="width: 11%;" >OH Value</th>
+    <th>Old value</th> 
     <th style="width: 13%;" >Final rate</th>	
+    <th style="width: 9%;">Ret %</th></tr> 
+  <th class="fourth-col">actions</th> 
+            </thead> -->
+
+
+            <thead>
+  <tr>
+    <th style="width: 8%;">S.No</th>
+    <th style="width: 22%">Extracted visit names</th>
+    <!-- Visit Def Desc -->
+   <th style="width: 22%; position: relative;" class="hover-th">
+  Visit Def Desc
+  <img class="filter-icon"
+    src="assets/filter.svg"
+    style="width: 20px; cursor: pointer;"
+    (mousedown)="openFilter('visitDesc')"
+  >
+  <!-- Filter Popup -->
+  <div
+    *ngIf="activeFilter === 'visitDesc'"
+    style="
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 10;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 0;
+      width: 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    "
+  >
+    <input
+      type="text"
+      [(ngModel)]="visitDescFilterValue"
+      placeholder="Search..."
+      style="width: 100%; padding: 4px;"
+     (change)="onGenerateBudget(visitDescFilterValue,entitlementFilterValue)"
+    >
+   
+  </div>
+</th>
+
+
+  <th style="width: 28%; position: relative;" class="hover-th">
+  Entitlement Name
+  <img class="filter-icon"
+    src="assets/filter.svg"
+    style="width: 20px; cursor: pointer;"
+    (mousedown)="openFilter('entitlement')"
+  >
+  <!-- Filter Popup -->
+  <div
+    *ngIf="activeFilter === 'entitlement'"
+    style="
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 10;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 0;
+      width: 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    "
+  >
+    <input
+      type="text"
+      [(ngModel)]="entitlementFilterValue"
+      placeholder="Search..."
+      style="width: 100%; padding: 4px;"
+      (change)="onGenerateBudget(visitDescFilterValue,entitlementFilterValue)"
+    >
+  </div>
+</th>
+
+    <th style="width: 11%;">Rate</th>
+    <th style="width: 11%;">OH Value</th>
+    <th style="width: 13%;">Final Rate</th>
     <th style="width: 9%;">Ret %</th>
-  <!-- <th class="fourth-col">actions</th></tr> -->
-            </thead>
+  </tr>
+</thead>
+
           <tbody>
   <!-- Show skeleton rows while loading -->
   <ng-container *ngIf="loading; else dataRows">
@@ -213,6 +293,9 @@
                  (keydown.enter)="stopEditing()"
                  autofocus />
         </ng-template>
+      </td>
+      <td>
+        {{row.baiExtractedVisitName}}
       </td>
       <td (click)="editCell(rowIndex, 'entitlementName')">
         <ng-container *ngIf="!isEditing(rowIndex, 'entitlementName'); else indexInput">
@@ -270,17 +353,50 @@
         </ng-template>
       </td>
     </tr>
-  </ng-template>
-</tbody>
- <!-- <td style="font-weight: bold;">Total </td>
+    <tr *ngIf="flag">
+     <td style="font-weight: bold;">Total </td>
   <td style="font-weight: bold;text-align: end;"></td>
+   <td style="font-weight: bold;text-align: end;"></td>
    <td style="font-weight: bold;text-align: end;"></td>
       <td style="font-weight: bold;text-align: end;">{{totalVisitCost}}</td>
        <td style="font-weight: bold;text-align: end;"></td>
-        <td style="font-weight: bold;text-align: end;">{{totalVisitCost}}</td> -->
+        <td style="font-weight: bold;text-align: end;">{{totalVisitCost}}</td>
+        <td style="font-weight: bold;text-align: end;"></td>
+     
+ </tr>
+
+        <!-- <div>
+  <button (click)="previousPage()" [disabled]="currentPage === 0">
+    Previous
+  </button>
+
+  Page {{ currentPage + 1 }} of {{ totalPages }}
+
+  <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">
+    Next
+  </button>
+</div> -->
+  </ng-template>
+    
+</tbody>
 
 
           </table>
+           <div style="display: flex;" *ngIf="flag">
+  <button  (click)="onGenerateBudget(visitDescFilterValue,entitlementFilterValue,currentPage-1)" [disabled]="currentPage === 0" style="width: max-content;
+    margin-left: 15%;
+    margin-right: 10%;">
+    Previous
+  </button>
+
+  Page {{ currentPage + 1 }} of {{ totalPages }}
+
+  <button (click)="onGenerateBudget(visitDescFilterValue,entitlementFilterValue,currentPage+1)" [disabled]="currentPage >= totalPages - 1" style="width: max-content;
+    margin-left: 10%;
+    margin-right: 10%;">
+    Next
+  </button>
+</div>
          </div>
         <div class="btn-container">
                   <button id="generateSubmitButton" (click)="openModel()" >Save To APECS</button>

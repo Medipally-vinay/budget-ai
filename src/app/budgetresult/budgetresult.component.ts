@@ -18,6 +18,7 @@ export class BudgetresultComponent {
   constructor(private dataUploadService:DataUploadService,private sharedService:SharedService){
 
   }
+  flag:boolean=false;
   Retention:any='';
   Overhead:any="";
   Overheadval:number=0;
@@ -247,6 +248,15 @@ payees:any=[];
 schedules:any=[];
 priceLists:any=[];
 entitlementSets:any=[];
+ activeFilter: string | null = null;
+
+ 
+  visitDescFilterValue: string = '';
+  entitlementFilterValue: string = '';
+  currentPage: number = 0;
+pageSize: number = 0;
+totalElements: number = 0;
+totalPages: number = 0;
 
 
  tablesData: any[] = [];
@@ -325,9 +335,99 @@ ngOnInit(){
   })
   // this.ongetstudy();
   //  this.calculatevalues();
+  // this.calculatevalues();
 
 }
+  
 
+  // handle clicking the filter icon
+  openFilter(filterName: string) {
+    if (this.activeFilter === filterName) {
+      // If already open, close it
+      this.activeFilter = null;
+    } else {
+      // Open the selected one
+      this.activeFilter = filterName;
+    }
+  }
+//   loadData(
+//   visitDesc: string,
+//   entitlement: string,
+//   page: number
+ 
+// ) {
+//   this.dataUploadService.filters(visitDesc, entitlement).subscribe({
+//         next: (response: any) => {
+//           this.loading=false;
+//           console.log('generated budget data:', response);
+          
+//            this.data=response;
+//            this.currentPage = response.page;
+//            this.pageSize = response.size;
+//            this.totalElements = response.totalElements;
+//            this.totalPages = response.totalPages;
+
+//            this.calculatevalues();
+//           this.loading=false;
+         
+//         },
+//         error: (error: any) => {
+//           console.error('Failed to genereate budget data', error);
+//           alert('Failed to genereate budget data');
+//           this.loading=false;
+//         }
+//       });
+// }
+// nextPage() {
+//   if (this.currentPage < this.totalPages - 1) {
+//     this.currentPage++;
+//     this.loadData(
+//       this.visitDescFilterValue,
+//       this.entitlementFilterValue,
+//       this.currentPage
+     
+//     );
+//   }
+// }
+
+// previousPage() {
+//   if (this.currentPage > 0) {
+//     this.currentPage--;
+//     this.loadData(
+//       this.visitDescFilterValue,
+//       this.entitlementFilterValue,
+//       this.currentPage
+     
+//     );
+//   }
+// }
+  applyFilter() {
+  const visitDesc = this.visitDescFilterValue.trim();
+  const entitlement = this.entitlementFilterValue.trim();
+  
+  this.currentPage = 0;
+  console.log('Filtering with:', { visitDesc, entitlement });
+
+  // this.dataUploadService.filters(visitDesc, entitlement,this.currentPage).subscribe({
+  //       next: (response: any) => {
+  //         this.loading=false;
+  //         console.log('generated budget data:', response);
+          
+  //          this.data=response;
+
+  //          this.calculatevalues();
+  //         this.loading=false;
+         
+  //       },
+  //       error: (error: any) => {
+  //         console.error('Failed to genereate budget data', error);
+  //         alert('Failed to genereate budget data');
+  //         this.loading=false;
+  //       }
+  //     });
+  
+  this.activeFilter = null;
+  }
 //dropdown values
 // get studies() {
 //     return this.dropdown;
@@ -381,29 +481,30 @@ resetRetention(index:number)
       }
     });
   }
-// totalVisitCost: number = 0;
-//   totalFinalCost: number = 0;
-//   calculatevalues(): void{
-//     this.totalVisitCost = 0;
-//     this.totalFinalCost = 0;
+totalVisitCost: number = 0;
+  totalFinalCost: number = 0;
+  calculatevalues(): void {
+  this.totalVisitCost = 0;
+  this.totalFinalCost = 0;
 
-    
-//     for (const item of this.data) {
-      
-//       const visitCost = parseFloat(
-//         (item["Visit Cost"] || "0").replace(/,/g, "")
-//       );
+  for (const item of this.data) {
+    const visitCost = parseFloat(
+      (item["Visit Cost"] || "0").replace(/,/g, "")
+    );
 
-      
-//       const finalRate = parseFloat(
-//         (item["Final Visit Rate"] || "0").replace(/,/g, "")
-//       );
+    const finalRate = parseFloat(
+      (item["Final Visit Rate"] || "0").replace(/,/g, "")
+    );
 
-      
-//       this.totalVisitCost += visitCost;
-//       this.totalFinalCost += finalRate;
-//     }
-//   }
+    this.totalVisitCost += visitCost;
+    this.totalFinalCost += finalRate;
+  }
+
+  // Round to two decimal places
+  this.totalVisitCost = Math.round(this.totalVisitCost * 100) / 100;
+  this.totalFinalCost = Math.round(this.totalFinalCost * 100) / 100;
+}
+
   onTableToggle(index: number,Overhead:number) {
     this.selectedIndex = this.selectedIndex === index ? null : index;
     this.Overheadval=this.Overhead;
@@ -496,7 +597,11 @@ resetRetention(index:number)
         }
     })
   }
-   onGenerateBudget() {
+   onGenerateBudget(visitname?:string,entname?:string,page?:number) {
+    this.visitDescFilterValue = visitname ?? '';
+    this.entitlementFilterValue=entname?? '';
+    this.currentPage = page ?? -1;
+    this.flag=true;
     this.loading=true;
     if (this.selectedIndex === null) {
       alert('Please select a table.');
@@ -506,17 +611,18 @@ resetRetention(index:number)
     const selectedTable = this.tablesData[this.selectedIndex].table;
     
     console.log(selectedTable);
-    this.dataUploadService.budgetdata(selectedTable,this.Overhead,this.Retention,this.selectedEntitlementSetId).subscribe({
+    this.dataUploadService.budgetdata(selectedTable,this.Overhead,this.Retention,this.selectedEntitlementSetId,this.visitDescFilterValue,this.entitlementFilterValue,this.currentPage).subscribe({
         next: (response: any) => {
           this.loading=false;
           console.log('generated budget data:', response);
-          // for(let i=0;i< response.updated_table.length;i++){
-          //   response.updated_table[i]["cycle"] =Object.keys(response.updated_table[i])[0]
-          //   response.updated_table[i]["cycleValue"] =Object.values(response.updated_table[i])[0]
-          //   response.updated_table[i]["index"] =i
-          // }
-           this.data=response;
-          //  this.calculatevalues();]
+          
+           this.data=response.data;
+           this.totalPages=response.totalPages;
+           this.currentPage = response.page;
+           this.pageSize = response.size;
+           this.totalElements = response.totalElements;
+           
+           this.calculatevalues();
           this.loading=false;
          
         },
@@ -526,6 +632,11 @@ resetRetention(index:number)
           this.loading=false;
         }
       });
+       this.activeFilter = null;
+
+
+  // this.visitDescFilterValue = '';
+  // this.entitlementFilterValue = '';
    
   }
   onok(){
@@ -563,10 +674,10 @@ isEditing(rowIndex: number, column: string): boolean {
 stopEditing() {
   this.editingCell = null;
 }
-generateBudgetTableData(table: any[]) {
-    // Implement this function or emit an event to parent
-    console.log('Generating budget for:', table);
-}
+// generateBudgetTableData(table: any[]) {
+//     // Implement this function or emit an event to parent
+//     console.log('Generating budget for:', table);
+// }
 
 
   showFeedbackModal = false;      // Set to true to show modal by default

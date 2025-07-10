@@ -6,6 +6,8 @@
     background-color: white;
     /* justify-content: space-around; */
     padding: 2%;
+    height: 105%;
+    /* height: calc(100% - 60px); */
 }
 
 
@@ -686,4 +688,19 @@ td.fourth-col:hover {
   box-shadow: none !important;
 
    
+}
+
+
+
+.hover-th .filter-icon {
+  display: none;
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Show it only when hovering over the <th> */
+.hover-th:hover .filter-icon {
+  display: inline-block;
 }
