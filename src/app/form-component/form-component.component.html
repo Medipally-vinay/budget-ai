@@ -27,11 +27,13 @@
      
         <!-- File Upload -->
         <label for="pdfFile">Upload Contract:</label>
-        <input type="file"  (change)="onFileSelected($event)" id="pdfFile" name="pdfFile" accept="application/pdf" required />
+        <input type="file"  (change)="onFileSelected($event)" id="pdfFile" name="pdfFile"  accept="application/pdf,
+          application/vnd.ms-excel,
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required />
      
         <!-- Page Numbers -->
         <label for="pageNumbers">Page Numbers:</label>
-        <input type="text"  [(ngModel)]="pageNumber" id="pageNumbers" name="pageNumbers" placeholder="Enter page numbers (e.g., 1,2,3)" required />
+        <input type="text"  [(ngModel)]="pageNumber" id="pageNumbers" name="pageNumbers" [disabled]="isExcel" placeholder="Enter page numbers (e.g., 1,2,3)" required />
        
         
  

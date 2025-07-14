@@ -7,7 +7,8 @@
   <div class="table-choices-list" style="min-width: 428px;">
   <div><h3>Budget Extract From Contract</h3></div>
   <div style="margin-top: 10px;"><span>Extracted Time : {{response}}</span></div>
-  <div *ngFor="let item of tablesData.slice(0, tablesData.length - 1); index as idx" class="table-choice">
+  <!-- tablesData.slice(0, tablesData.length - 1) -->
+  <div *ngFor="let item of lefttable ; index as idx" class="table-choice">
     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
     <span 
       (click)="onTableToggle(idx,+item.Overhead)" 
@@ -27,6 +28,7 @@
     <table *ngIf="selectedIndex === idx" class="styled-budget-table">
       <thead>
         <tr>
+          
           <th>Visit</th>
           <th >{{ +item.Overhead > 0 ? 'Rate (with OH - ' + item.Overhead + '%)' : 'Rate (without OH)' }} </th>
           <th >Confidence</th>
@@ -35,6 +37,7 @@
       <tbody>
         <ng-container *ngFor="let visit of item.table">
           <tr>
+           
             <td>{{ visit.VISIT_NAME}}</td>
             <td style="text-align: right;">{{ visit.VISIT_COST }}</td>
             <td style="text-align: right;">{{ visit.CONFIDENCE }}</td>
@@ -54,7 +57,7 @@
               <div class="triple-container">
                 <div class="eye-container">
                   <img src="assets/eye.png" height="20px" width="40px"/>
-                  View Uploaded Contract
+                  <!-- View Uploaded Contract -->{{filename}}
                 </div>
                 <span id="successPercentage" style="margin-left: 10px; font-weight: bold; color: green;"></span>
                 <div id="form-display">

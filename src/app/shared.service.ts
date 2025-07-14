@@ -9,6 +9,13 @@ export class SharedService {
   constructor() { }
   private datasubject=new BehaviorSubject<any>('');
   data$=this.datasubject.asObservable();
+
+  private filename=new BehaviorSubject<any>('');
+  file$=this.filename.asObservable();
+  setfile(data:any)
+  {
+    this.filename.next(data);
+  }
   setData(data:any)
   {
     this.datasubject.next(data);

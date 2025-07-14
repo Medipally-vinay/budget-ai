@@ -137,7 +137,7 @@ export class BudgetresultComponent {
   // ];
   data:any[]=[ 
       ]
-//       data:any[]=[
+      // data:any[]=[
 //   {
 //     "baiExtractedVisitName": "VD1",
 //     "apecsVisitName": "V01",
@@ -319,6 +319,8 @@ totalPages: number = 0;
   selectedIndex: number | null = null;
   audit:any=0;
   response:any=0;
+  lefttable:any=[];
+  filename:any='';
 ngOnInit(){
   this.sharedService.data$.subscribe(value=>{
     // this.audit=value.find((obj: any)=>Object.keys(obj).length==1 && obj.hasOwnProperty("id"))
@@ -333,9 +335,13 @@ ngOnInit(){
   this.sharedService.study$.subscribe(value=>{
     this.studynum=value;
   })
+  this.sharedService.file$.subscribe(value=>{
+    this.filename=value;
+  })
   // this.ongetstudy();
   //  this.calculatevalues();
   // this.calculatevalues();
+  this.lefttable=this.tablesData.filter(obj=>obj.hasOwnProperty('description'));
 
 }
   
