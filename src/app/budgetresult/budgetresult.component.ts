@@ -137,7 +137,7 @@ export class BudgetresultComponent {
   // ];
   data:any[]=[ 
       ]
-      // data:any[]=[
+//      data:any[]=[ 
 //   {
 //     "baiExtractedVisitName": "VD1",
 //     "apecsVisitName": "V01",
@@ -627,8 +627,9 @@ totalVisitCost: number = 0;
            this.currentPage = response.page;
            this.pageSize = response.size;
            this.totalElements = response.totalElements;
-           
-           this.calculatevalues();
+           this.totalVisitCost = response.rates.totalVisitCost;
+           this.totalFinalCost = response.rates.totalFinalCost;
+          //  this.calculatevalues();
           this.loading=false;
          
         },
