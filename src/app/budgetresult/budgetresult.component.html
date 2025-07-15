@@ -30,7 +30,7 @@
         <tr>
           
           <th>Visit</th>
-          <th >{{ +item.Overhead > 0 ? 'Rate (with OH - ' + item.Overhead + '%)' : 'Rate (without OH)' }} </th>
+          <th >{{item.Overhead && +item.Overhead.replace('%','') > 0 ? 'Rate (with OH - ' + item.Overhead + '%)' : 'Rate (without OH)' }} </th>
           <th >Confidence</th>
         </tr>
       </thead>
@@ -287,19 +287,19 @@
   <ng-template #dataRows>
     <tr *ngFor="let row of data; let rowIndex = index">
       <td>{{ rowIndex + 1 }}</td>
-      <td (click)="editCell(rowIndex, 'apecsVisitName')">
-        <ng-container *ngIf="!isEditing(rowIndex, 'apecsVisitName'); else visitNameInput">
-          {{ row.apecsVisitName }}
+      <td (click)="editCell(rowIndex, 'baiExtractedVisitName')">
+        <ng-container *ngIf="!isEditing(rowIndex, 'baiExtractedVisitName'); else visitNameInput">
+           {{row.baiExtractedVisitName}}
         </ng-container>
         <ng-template #visitNameInput>
-          <input [(ngModel)]="row['apecsVisitName']"
+          <input [(ngModel)]="row['baiExtractedVisitName']"
                  (blur)="stopEditing()"
                  (keydown.enter)="stopEditing()"
                  autofocus />
         </ng-template>
       </td>
       <td>
-        {{row.baiExtractedVisitName}}
+       {{ row.apecsVisitName }}
       </td>
       <td (click)="editCell(rowIndex, 'entitlementName')">
         <ng-container *ngIf="!isEditing(rowIndex, 'entitlementName'); else indexInput">

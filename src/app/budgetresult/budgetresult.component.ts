@@ -329,8 +329,8 @@ ngOnInit(){
 )?.response_time;
     this.tablesData=value;
     console.log(this.tablesData);
-      this.calculateTotalVisitCosts();
-   
+    this.calculateTotalVisitCosts();
+    
   })
   this.sharedService.study$.subscribe(value=>{
     this.studynum=value;
@@ -628,7 +628,7 @@ totalVisitCost: number = 0;
            this.pageSize = response.size;
            this.totalElements = response.totalElements;
            this.totalVisitCost = response.rates.totalVisitCost;
-           this.totalFinalCost = response.rates.totalFinalCost;
+           this.totalFinalCost = response.rates.totalFinalRate;
           //  this.calculatevalues();
           this.loading=false;
          
