@@ -76,11 +76,21 @@ export class BudgetresultComponent {
   audit:any=0;
 ngOnInit(){
   this.sharedService.data$.subscribe(value=>{
-    this.audit=value.find((obj: any)=>Object.keys(obj).length==1 && obj.hasOwnProperty("id"))
+    // Extract data from response if it's wrapped in 'data' property
+    const dataArray = value?.data || value;
+    
+    // Find audit object
+    this.audit = Array.isArray(dataArray) 
+      ? dataArray.find((obj: any) => Object.keys(obj).length == 1 && obj.hasOwnProperty("id"))
+      : null;
 
-    this.tablesData=value;
+    // Set tablesData, excluding audit object
+    this.tablesData = Array.isArray(dataArray)
+      ? dataArray.filter((obj: any) => !(Object.keys(obj).length == 1 && obj.hasOwnProperty("id")))
+      : [];
+    
     console.log(this.tablesData);
-      this.calculateTotalVisitCosts();
+    this.calculateTotalVisitCosts();
    
   })
   this.sharedService.study$.subscribe(value=>{
@@ -90,6 +100,7 @@ ngOnInit(){
 }
   // Function to remove currency symbols and parse number
   parseCost(costStr: string): number {
+    if (!costStr) return 0;
     return parseFloat(costStr.replace(/[€,]/g, '').replace(/\s/g, ''));
   }
 
@@ -99,7 +110,9 @@ ngOnInit(){
     this.tablesData.forEach(item => {
       if (Array.isArray(item.table)) {
         const total = item.table.reduce((sum:number, row:any) => {
-          const cost = this.parseCost(row['VISIT COST']);
+          // Use VISIT_COST (with underscore) as per API response
+          const costStr = row['VISIT_COST'] || row['VISIT COST'] || '';
+          const cost = this.parseCost(costStr);
           return sum + (isNaN(cost) ? 0 : cost);
         }, 0);
         console.log("total sum",total);
