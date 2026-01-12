@@ -76,8 +76,30 @@ export class BudgetresultComponent {
   audit:any=0;
 ngOnInit(){
   this.sharedService.data$.subscribe(value=>{
+    console.log('Raw response from service:', value);
+    
     // Extract data from response if it's wrapped in 'data' property
-    const dataArray = value?.data || value;
+    // Handle both { data: [...] } and direct array response
+    let dataArray: any[] = [];
+    
+    if (value) {
+      if (Array.isArray(value)) {
+        dataArray = value;
+      } else if (value.data && Array.isArray(value.data)) {
+        dataArray = value.data;
+      } else if (typeof value === 'object') {
+        // Try to find any array property
+        const keys = Object.keys(value);
+        for (const key of keys) {
+          if (Array.isArray(value[key])) {
+            dataArray = value[key];
+            break;
+          }
+        }
+      }
+    }
+    
+    console.log('Extracted dataArray:', dataArray);
     
     // Find audit object
     this.audit = Array.isArray(dataArray) 
@@ -89,16 +111,26 @@ ngOnInit(){
       ? dataArray
           .filter((obj: any) => !(Object.keys(obj).length == 1 && obj.hasOwnProperty("id")))
           .map((obj: any) => {
-            // Normalize table* property to table
-            if (obj.hasOwnProperty('table*')) {
-              obj.table = obj['table*'];
-              delete obj['table*'];
+            // Create a new object to avoid mutating the original
+            const normalizedObj = { ...obj };
+            
+            // Normalize table* property to table (handle both table* and table)
+            if (normalizedObj.hasOwnProperty('table*')) {
+              normalizedObj.table = normalizedObj['table*'];
+              delete normalizedObj['table*'];
             }
-            return obj;
+            
+            // Ensure table property exists and is an array
+            if (!normalizedObj.table || !Array.isArray(normalizedObj.table)) {
+              console.warn('Item missing table array:', normalizedObj);
+            }
+            
+            return normalizedObj;
           })
       : [];
     
     console.log('Processed tablesData:', this.tablesData);
+    console.log('tablesData length:', this.tablesData.length);
     this.calculateTotalVisitCosts();
    
   })

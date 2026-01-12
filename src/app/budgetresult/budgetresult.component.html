@@ -6,7 +6,11 @@
 
   <div class="table-choices-list" style="min-width: 428px;">
   <div><h3>Budget Extract From Contract</h3></div>
-  <div *ngFor="let item of tablesData.slice(0, tablesData.length - 1); index as idx" class="table-choice">
+  <!-- Debug: tablesData length = {{ tablesData.length }} -->
+  <div *ngIf="tablesData.length === 0" style="padding: 20px; color: #666;">
+    No data available. Please check the console for details.
+  </div>
+  <div *ngFor="let item of tablesData; index as idx" class="table-choice">
     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
     <span 
       (click)="onTableToggle(idx)" 
