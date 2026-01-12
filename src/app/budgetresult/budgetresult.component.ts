@@ -84,12 +84,21 @@ ngOnInit(){
       ? dataArray.find((obj: any) => Object.keys(obj).length == 1 && obj.hasOwnProperty("id"))
       : null;
 
-    // Set tablesData, excluding audit object
+    // Set tablesData, excluding audit object and normalize table* to table
     this.tablesData = Array.isArray(dataArray)
-      ? dataArray.filter((obj: any) => !(Object.keys(obj).length == 1 && obj.hasOwnProperty("id")))
+      ? dataArray
+          .filter((obj: any) => !(Object.keys(obj).length == 1 && obj.hasOwnProperty("id")))
+          .map((obj: any) => {
+            // Normalize table* property to table
+            if (obj.hasOwnProperty('table*')) {
+              obj.table = obj['table*'];
+              delete obj['table*'];
+            }
+            return obj;
+          })
       : [];
     
-    console.log(this.tablesData);
+    console.log('Processed tablesData:', this.tablesData);
     this.calculateTotalVisitCosts();
    
   })
