@@ -1,6 +1,6 @@
 export const environment = {
 
     production:false,
-    apiUrl:'http://192.168.1.87:5000'
+    apiUrl:'https://app-con-poc-f9dge4ewg0fbbnaz.eastus-01.azurewebsites.net/'
 
 };

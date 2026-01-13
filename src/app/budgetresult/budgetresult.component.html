@@ -7,9 +7,7 @@
   <div class="table-choices-list" style="min-width: 428px;">
   <div><h3>Budget Extract From Contract</h3></div>
   <!-- Debug: tablesData length = {{ tablesData.length }} -->
-  <div *ngIf="tablesData.length === 0" style="padding: 20px; color: #666;">
-    No data available. Please check the console for details.
-  </div>
+ 
   <div *ngFor="let item of tablesData; index as idx" class="table-choice">
     <input type="radio" name="tableSelect" [value]="idx" [(ngModel)]="selectedIndex" />
     <span 
@@ -161,10 +159,10 @@
     <td>{{rowIndex + 1}}</td>
     <td (click)="editCell(rowIndex, 'VISIT NAME')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT NAME'); else visitNameInput">
-        {{ row["VISIT NAME"] }}
+        {{ row.VISIT_NAME }}
       </ng-container>
       <ng-template #visitNameInput>
-        <input [(ngModel)]="row['VISIT NAME']"
+        <input [(ngModel)]="row.VISIT_NAME"
                (blur)="stopEditing()"
                (keydown.enter)="stopEditing()"
                autofocus  style="min-width: 20px;
@@ -175,7 +173,7 @@
 
     <td (click)="editCell(rowIndex, 'index')">
       <ng-container *ngIf="!isEditing(rowIndex, 'index'); else indexInput">
-        {{ row.index }} - {{ row["VISIT NAME"] }}
+        {{ row.index }} - {{ row.VISIT_NAME }}
       </ng-container>
       <ng-template #indexInput>
         <input [(ngModel)]="row.index"
@@ -189,10 +187,10 @@
 
     <td style="text-align: right;" (click)="editCell(rowIndex, 'VISIT COST')">
       <ng-container *ngIf="!isEditing(rowIndex, 'VISIT COST'); else costInput">
-        {{ row["VISIT COST"] }}
+        {{ row.VISIT_COST }}
       </ng-container>
       <ng-template #costInput>
-        <input [(ngModel)]="row['VISIT COST']"
+        <input [(ngModel)]="row.VISIT_COST"
                (blur)="stopEditing()"
                (keydown.enter)="stopEditing()"
                autofocus  style="min-width: 20px;
